@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{base::Layout(~{::section})}">
+<head>
+<title>AdminLTE v4 | Dashboard</title>
+</head>
+
+<body>
+	
+	<section th:fragment="section">
+			<main class="app-main">
+			
+		<div class="container-fluid mt-4">
+
+<div class="row g-4 dashboard-grid">
+
+<!-- MEDIA & UPLOAD -->
+<div class="col-lg-4 col-md-6">
+<div class="card dashboard-parent">
+
+<div class="card-header bg-primary text-white">
+<i class="bi bi-box-seam-fill"></i> Media & Upload
+</div>
+
+<div class="card-body child-container">
+
+<a href="/media?type=banner1" class="child-card">Banner1</a>
+<a href="/media?type=banner2" class="child-card">Banner2</a>
+<a href="/media?type=banner3" class="child-card">Banner3</a>
+
+</div>
+</div>
+</div>
+
+
+<!-- YOUTUBE -->
+<div class="col-lg-4 col-md-6">
+<div class="card dashboard-parent">
+
+<div class="card-header bg-danger text-white">
+<i class="bi bi-youtube"></i> Youtube
+</div>
+
+<div class="card-body child-container">
+
+<a href="/youtube/replace/main" class="child-card">Main Video</a>
+<a href="/youtube/replace/office" class="child-card">Office</a>
+<a href="/youtube/replace/quality_room" class="child-card">Quality Room</a>
+<a href="/youtube/replace/forging_machine" class="child-card">Forging Machine</a>
+<a href="/youtube/replace/turning_machine" class="child-card">Turning Machine</a>
+<a href="/youtube/replace/tool_room" class="child-card">Tool Room</a>
+<a href="/youtube/replace/fg_store" class="child-card">FG Store</a>
+<a href="/youtube/replace/sorting_area" class="child-card">Sorting Area</a>
+
+</div>
+</div>
+</div>
+
+
+<!-- CAROUSEL -->
+<div class="col-lg-4 col-md-12">
+<div class="card dashboard-parent">
+
+<div class="card-header bg-warning text-dark">
+<i class="bi bi-card-image"></i> Carousel
+</div>
+
+<div class="card-body">
+
+<div class="child-container single-item">
+<a href="/carousel" class="child-card w-100 text-center">
+Carousel Images
+</a>
+</div>
+
+</div>
+</div>
+</div>
+
+
+
+<!-- ORGANIZATION -->
+<div class="col-lg-4 col-md-12">
+<div class="card dashboard-parent">
+
+<div class="card-header bg-success text-white">
+<i class="bi bi-map"></i> Organization
+</div>
+
+<div class="card-body">
+<div class="child-container single-item">
+
+<a href="/organization-chart/upload" class="child-card w-100 text-center">Upload Chart</a>
+
+</div>
+</div>
+</div>
+</div>
+
+
+<!-- NEWS -->
+<div class="col-lg-4 col-md-12">
+<div class="card dashboard-parent">
+
+<div class="card-header bg-info text-white">
+<i class="bi bi-newspaper"></i> News
+</div>
+
+<div class="card-body">
+<div class="child-container single-item">
+
+<a href="/news/manage-news" class="child-card">Manage News</a>
+
+</div>
+</div>
+</div>
+</div>
+
+
+<!-- PRODUCTS -->
+<div class="col-lg-4 col-md-6">
+<div class="card dashboard-parent">
+
+<div class="card-header bg-dark text-white">
+<i class="bi bi-cart"></i> Products
+</div>
+
+<div class="card-body child-container">
+
+<a href="/product/add-fastners" class="child-card">Fastners</a>
+<a href="#" class="child-card">Nuts</a>
+<a href="#" class="child-card">Bolts</a>
+<a href="#" class="child-card">Screws</a>
+<a href="#" class="child-card">Threaded Rod</a>
+<a href="#" class="child-card">Hose Clamp</a>
+
+</div>
+</div>
+</div>
+
+</div>
+
+</div>
+
+	
+			
+		</main>
+		
+		
+		</section>
+		
+		<footer class="app-footer">
+			
+			<strong> &copy; 2025 AVT Fastners Pvt. Ltd. All rights
+				reserved. </strong> All rights reserved.
+			
+		</footer>
+		
+	</div>
+	
+	<script
+		src="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.11.0/browser/overlayscrollbars.browser.es6.min.js"
+		crossorigin="anonymous"></script>
+	
+	<script
+		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+		crossorigin="anonymous"></script>
+	
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.min.js"
+		crossorigin="anonymous"></script>
+	
+	<script th:src="@{/dashboard/js/adminlte.js}"></script>
+
+	
+	<script>
+      const SELECTOR_SIDEBAR_WRAPPER = '.sidebar-wrapper';
+      const Default = {
+        scrollbarTheme: 'os-theme-light',
+        scrollbarAutoHide: 'leave',
+        scrollbarClickScroll: true,
+      };
+      document.addEventListener('DOMContentLoaded', function () {
+        const sidebarWrapper = document.querySelector(SELECTOR_SIDEBAR_WRAPPER);
+        if (sidebarWrapper && OverlayScrollbarsGlobal?.OverlayScrollbars !== undefined) {
+          OverlayScrollbarsGlobal.OverlayScrollbars(sidebarWrapper, {
+            scrollbars: {
+              theme: Default.scrollbarTheme,
+              autoHide: Default.scrollbarAutoHide,
+              clickScroll: Default.scrollbarClickScroll,
+            },
+          });
+        }
+      });
+    </script>
+	
+	<script
+		src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"
+		crossorigin="anonymous"></script>
+	
+	<script>
+      new Sortable(document.querySelector('.connectedSortable'), {
+        group: 'shared',
+        handle: '.card-header',
+      });
+
+      const cardHeaders = document.querySelectorAll('.connectedSortable .card-header');
+      cardHeaders.forEach((cardHeader) => {
+        cardHeader.style.cursor = 'move';
+      });
+    </script>
+	
+	<script
+		src="https://cdn.jsdelivr.net/npm/apexcharts@3.37.1/dist/apexcharts.min.js"
+		integrity="sha256-+vh8GkaU7C9/wbSLIcwq82tQ2wTf44aOHA8HlBMwRI8="
+		crossorigin="anonymous"></script>
+	
+	<script
+		src="https://cdn.jsdelivr.net/npm/jsvectormap@1.5.3/dist/js/jsvectormap.min.js"
+		integrity="sha256-/t1nN2956BT869E6H4V1dnt0X5pAQHPytli+1nTZm2Y="
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/jsvectormap@1.5.3/dist/maps/world.js"
+		integrity="sha256-XPpPaZlU8S/HWf7FZLAncLg2SAkP8ScUTII89x9D3lY="
+		crossorigin="anonymous"></script>
+	
+	<script>
+let idleTime = 0;
+const idleLimit = 600; // seconds (testing)
+
+function resetIdleTimer() {
+  idleTime = 0;
+}
+
+setInterval(function() {
+  idleTime++;
+  if (idleTime >= idleLimit) {
+    // Call Spring Security logout
+    fetch('/logout', { method: 'POST' }) // Spring handles this
+      .then(() => {
+        window.location.href = "/signin"; // redirect after logout
+      })
+      .catch(err => {
+        console.error("Logout failed", err);
+        window.location.href = "/signin"; // fallback
+      });
+  }
+}, 1000);
+
+// Reset timer on user activity
+window.onload = resetIdleTimer;
+document.onmousemove = resetIdleTimer;
+document.onkeypress = resetIdleTimer;
+document.onscroll = resetIdleTimer;
+</script>
+
+
+</body>
+
+</html>

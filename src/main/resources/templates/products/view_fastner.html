@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title th:text="${fastner.name} + ' | Fasteners Details'">Fastener
+	Details</title>
+
+<link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+
+<style>
+/* ====== HEADER STYLE ====== */
+.fastener-header {
+	position: relative;
+	text-align: left;
+	padding: 80px 5%;
+	overflow: hidden;
+	background-color: #fff;
+}
+
+.fastener-header::before {
+	content: "";
+	position: absolute;
+	top: 50%;
+	left: 15%;
+	transform: translate(-50%, -50%);
+	width: 300px;
+	height: 300px;
+	background: url("/img/helmet.png") no-repeat center;
+	background-size: contain;
+	opacity: 0.07; /* makes it faint like watermark */
+	z-index: 0;
+}
+
+.fastener-header h5 {
+	font-style: italic;
+	color: #777;
+	position: relative;
+	z-index: 1;
+}
+
+.fastener-header h1 {
+	font-weight: 800;
+	font-size: 2.8rem;
+	color: #111;
+	margin-top: 10px;
+	position: relative;
+	z-index: 1;
+}
+
+.fastener-header h1::after {
+	content: "";
+	display: block;
+	width: 60px;
+	height: 3px;
+	background: #e63946;
+	margin-top: 10px;
+}
+
+/* ====== SECTION STYLE ====== */
+.section-container {
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+  align-items: center;
+}
+
+
+.image-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-section img {
+  width: 100%;
+  max-width: 500px;         /* limits width so it doesn’t get too big */
+  height: 350px;            /* fixed visual height for all images */
+  object-fit: cover;        /* crops image neatly instead of stretching */
+  border-radius: 50px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.image-section img:hover {
+  transform: scale(1.03);
+}
+
+/* Left-aligned image */
+.left-image {
+  display: flex;
+  justify-content: flex-start;
+}
+
+/* Right-aligned image */
+.right-image {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Responsive (for mobile devices) */
+@media (max-width: 768px) {
+  .section-container {
+    flex-direction: column !important;
+    text-align: center;
+  }
+
+  .left-image,
+  .right-image {
+    justify-content: center;
+  }
+
+  .text-section {
+    padding: 1rem 0;
+  }
+
+  .image-section img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+.text-section {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	padding: 20px;
+}
+
+.text-section h3 {
+	font-weight: 600;
+	margin-bottom: 1rem;
+	color: #1a1a1a;
+}
+
+.text-section p {
+	font-size: 1.05rem;
+	line-height: 1.7;
+	color: #333;
+	text-align: justify;
+}
+
+/* ====== BACK BUTTON ====== */
+.back-btn {
+	margin-top: 50px;
+	text-align: center;
+}
+
+.back-btn a {
+	border-radius: 50px;
+	padding: 10px 25px;
+	transition: all 0.3s ease;
+}
+
+.back-btn a:hover {
+	background: #e63946;
+	color: #fff;
+}
+</style>
+</head>
+
+<body>
+	<div th:replace="fragments/header :: siteHeader"></div>
+
+	<!-- ====== Fastener Header Section ====== -->
+	<div class="fastener-header">
+		<h5>Manufacturer & Supplier</h5>
+		<h1>FASTENERS</h1>
+
+	</div>
+
+	<!-- ====== Fastener Content Section ====== -->
+	<div>
+		<div class="container">
+			<!-- Sub Heading (Fastener Name) -->
+			<p>Anchor Fasteners, offered by AVT Fastners, are widely becoming
+				popular in the market for providing genuine quality Fasteners. These
+				are available in standard as well as customised specifications and
+				marketed under the marketing under the brand name like AVT Fastners
+				and have also played a vital role in the enhancement of the demands.
+				The unmatched quality and excellent performance has made the Anchor
+				Fastener ideal for various industrial sectors. Moreover, we are
+				enlisted amidst the leading Anchor Fasteners Manufacturers,
+				Suppliers and Exporters from India. Various national as well as
+				international buyers are placing bulk orders as there is no
+				alternative available for the same.</p>
+			<p>Anchor fasteners, popularly known as female thread, provided
+				by us will certainly be going to meet your requirements. Furnished
+				from the best quality material, our variety of products will help in
+				fixing the things properly. The fascinated customers should contact
+				us to get our range at aggressive rates.</p>
+			<h2 class="text-center text-danger" th:text="${fastner.name}"
+				style="text-decoration: underline;">Fastener Name</h2>
+
+			<!-- Content (optional summary) -->
+			<p class="text-center text-muted mb-5" th:text="${fastner.content}">Fastener
+				content summary...</p>
+
+			<!-- Image 1 on Left | Text on Right -->
+			<div class="row section-container align-items-center">
+				<div class="col-md-6 image-section left-image">
+					<img th:src="@{'/fastners/' + ${fastner.image1}}"
+						alt="Fastener Image 1" />
+				</div>
+				<div class="col-md-6 text-section">
+					<h3 th:text="${fastner.heading1}">Heading 1</h3>
+					<p th:text="${fastner.description1}">Description 1 goes here...</p>
+				</div>
+			</div>
+
+			<!-- Image 2 on Right | Text on Left -->
+			<div
+				class="row section-container align-items-center flex-md-row-reverse">
+				<div class="col-md-6 image-section right-image">
+					<img th:src="@{'/fastners/' + ${fastner.image2}}" class="img-fluid"
+						alt="Fastener Image 2" />
+				</div>
+				<div class="col-md-6 text-section">
+					<h3 th:text="${fastner.heading2}">Heading 2</h3>
+					<p th:text="${fastner.description2}">Description 2 goes here...</p>
+				</div>
+			</div>
+
+			<!-- Back Button -->
+			<div class="back-btn">
+				<a href="/product/show_fastners"
+					class="btn btn-outline-secondary mb-5 mt-3"> <i
+					class="fa-solid fa-arrow-left"></i> Back to Fasteners List
+				</a>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

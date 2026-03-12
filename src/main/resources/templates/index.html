@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AVT Fastners Pvt. Ltd.</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  
+</head>
+<body>
+
+ 
+
+<div th:replace="fragments/header :: siteHeader"></div>
+
+
+<!-- ✅ Hero Carousel -->
+<div class="hero-carousel">
+  <div th:each="img, stat : ${carouselImages}" 
+       th:classappend="${stat.index == 0} ? 'active' : ''"
+       th:style="|background-image: url('${img.imageUrl}')|"
+       class="carousel-slide">
+  </div>
+
+  <div class="carousel-dots">
+    <span th:each="img, stat : ${carouselImages}"
+          th:classappend="${stat.index == 0} ? 'dot active' : 'dot'"
+          th:onclick="'currentSlide(' + ${stat.index} + ')'" class="dot"></span>
+  </div>
+</div>
+
+
+
+<!-- Main Content (unchanged from your original index.html) -->
+<main>
+  <!-- Product Solutions -->
+  <section id="productImage">
+    <img th:src="@{${banner1.imageUrl}}" alt="Product Solutions" />
+    <div class="content">
+      <h2 th:text="${banner1.heading}">Product Solutions</h2>
+    <p th:utext="${banner1.description}">Default description here</p>
+    </div>
+  </section>
+
+  <!-- Assembly Technology -->
+  <section id="assembly-technology">
+    <img th:src="@{${banner2.imageUrl}}" alt="Assembly Technology Expert" />
+    <div class="content">
+      <h2 th:text="${banner2.heading}">Weight Chart</h2>
+    <p th:utext="${banner2.description}">Default description here</p>
+    </div>
+  </section>
+
+  <!-- Smart Factory -->
+  <section id="smart-factory">
+    <img th:src="@{${banner3.imageUrl}}" alt="Smart Factory Logistics" />
+    <div class="content">
+       <h2 th:text="${banner3.heading}">Smart Factory Logistics</h2>
+    <p th:utext="${banner3.description}">Default description here</p>
+    </div>
+  </section>
+</main>
+
+<!-- News & Media -->
+<section class="news-media-section">
+  <!-- News Section -->
+  <div class="news-section" id="news">
+    <h2><i class="fas fa-arrow-up-right-from-square"></i> News & Updates</h2>
+    <div class="news-wrapper">
+      <div class="news-list" id="newsList">
+        <!-- News items will be injected dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Media Section -->
+<div class="media-section" id="media">
+  <h2>Media</h2>
+
+  <div class="media-video" th:if="${video != null}">
+    <!-- Local mp4 -->
+    <div th:if="${video.videoUrl != null and video.videoUrl.startsWith('/videos/')}">
+      <video width="640" height="360" controls>
+        <source th:src="@{${video.videoUrl}}" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+    </div>
+
+    <!-- YouTube embed or external iframe URL -->
+    <div th:if="${video.videoUrl != null and !video.videoUrl.startsWith('/videos/')}">
+      <iframe width="640" height="360" th:src="${video.videoUrl}" frameborder="0" allowfullscreen></iframe>
+    </div>
+  </div>
+
+  <div th:unless="${video != null}">
+    <p>No video configured</p>
+  </div>
+
+  
+
+
+
+
+	<!-- ✅ Link to more videos page -->
+	  <div class="more-videos" style="text-align: right; margin-top: 10px;">
+	    <a th:href="@{/youtube/more}" class="btn-inline-hover" style="text-decoration: none;">more</a>
+	  </div>
+	</div>
+
+
+
+  </div>
+</div>
+
+</section>
+
+
+
+<script>
+  let scrollInterval; // Global interval reference
+
+  document.addEventListener("DOMContentLoaded", async () => {
+    const newsData = await fetchNews();
+    renderNews(newsData);
+    startScroll();
+  });
+
+  // Fetch news from backend
+  async function fetchNews() {
+    const res = await fetch('/news/all');
+    return await res.json();
+  }
+
+  // Render news items dynamically
+  function renderNews(newsData) {
+    const newsList = document.getElementById("newsList");
+    newsList.innerHTML = "";
+
+    newsData.forEach(news => {
+      const item = document.createElement("div");
+      item.classList.add("news-item");
+      item.innerHTML = `
+        <div class="news-date">${news.date}</div>
+        <div class="news-content">
+          <h3>${news.title}</h3>
+          <p>${news.description}</p>
+          ${news.link ? `<a href="${news.link}" class="news-more" target="_blank">more →</a>` : ""}
+        </div>
+      `;
+      newsList.appendChild(item);
+    });
+
+    // Add hover control
+    newsList.addEventListener("mouseenter", stopScroll);
+    newsList.addEventListener("mouseleave", startScroll);
+  }
+
+ // ✅ Start auto-scrolling (seamless infinite loop)
+function startScroll() {
+  const newsList = document.getElementById("newsList");
+  const scrollSpeed = 1; // Adjust speed if needed (1–3 is smooth)
+  
+  stopScroll(); // Clear any previous intervals before starting new one
+
+  scrollInterval = setInterval(() => {
+    // Increment scroll
+    newsList.scrollTop += scrollSpeed;
+
+    // ✅ Instantly loop back when near bottom (prevents visual pause)
+    if (newsList.scrollTop >= newsList.scrollHeight - newsList.clientHeight - 1) {
+      newsList.scrollTop = 0;
+    }
+  }, 30); // faster refresh for smoother motion
+}
+
+  // 🛑 Stop scrolling on hover
+  function stopScroll() {
+    clearInterval(scrollInterval);
+  }
+</script>
+
+
+<!-- About Us + Testimonials Section -->
+<section id="about" 
+         style="margin: 60px auto; 
+                padding: 40px; 
+                background: #fff;
+                border-radius: 12px; 
+                box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+                max-width: 1200px;">
+
+  <!-- Flex Layout -->
+  <div style="display: flex; align-items: center; gap: 40px; flex-wrap: wrap;">
+
+    <!-- Left: Text -->
+    <div style="flex: 2; color: #444; line-height: 1.8; font-size: 1rem;">
+      <p style="font-style: italic; color: #888;">Manufacturer & Supplier</p>
+      <h2 style="font-weight: bold; font-size: 2rem; margin-bottom: 10px;">ABOUT US</h2>
+      <hr style="width: 60px; border: 2px solid #e63946; margin: 15px 0;">
+      <p>
+        Keeping quality and client satisfaction as our foundation stone, we,
+        <strong>AVT Fastners</strong>, forayed into the business of manufacturing,
+        supplying, and trading a wide range of Fasteners & Stainless Steel Screws. 
+        Our products are known all over India for their quality, durability, and 
+        high load bearing strength.
+      </p>
+      <p>
+        We would like to introduce ourselves as the best industrial fastener 
+        manufacturer in Rohtak as well as the best industrial fastener supplier in Rohtak.
+      </p>
+      <p>
+        We also manufacture hex bolts, socket head cap bolts, collar bolts, studs, 
+        counter sunk skew, high tensile bolts, and high tensile fasteners with best 
+        quality & support all over in Rohtak. Call us or enquire for all types of 
+        industrial fasteners & bolts in Rohtak.
+      </p>
+    </div>
+
+    <!-- Right: Image -->
+    <!-- Right: Image -->
+<div style="flex: 1; text-align: center; background: transparent; box-shadow: none;">
+  <img src="/img/avtfast_logo.png" alt="About Us" 
+       style="max-width: 100%; object-fit: contain; border-radius: 0; box-shadow: none;">
+</div>
+
+
+  </div>
+
+  <!-- ✅ Testimonials Section -->
+  <div class="testimonials-section"  id="testimonial"
+       style="margin-top: 60px; padding: 30px; background: #f9f9f9; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.08);">
+    <h2 class="text-center" style="font-weight: bold;"><u>Testimonials</u></h2>
+    <h3 class="text-center mb-4" style="color: #444; font-size: 1.3rem;">WHAT PEOPLE SAY</h3>
+
+    <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+
+        <!-- Testimonial 1 -->
+        <div class="carousel-item active">
+          <div class="testimonial text-center">
+            <p class="testimonial-text" style="font-style: italic; color: #555;">"AVT has been the best supplier I have worked with by far! The quality and price of the product is excellent. I feel valued by them."</p>
+            <img src="/img/screws.jpg" class="rounded-circle testimonial-img" alt="Yogender Goel"
+                 style="width: 100px; height: 100px; object-fit: cover; margin: 20px auto; border: 3px solid #e63946; padding: 2px;">
+            <h5 class="mt-2">Yogender Goel</h5>
+            <small>Engineer</small>
+          </div>
+        </div>
+
+        <!-- Testimonial 2 -->
+        <div class="carousel-item">
+          <div class="testimonial text-center">
+            <p class="testimonial-text" style="font-style: italic; color: #555;">"AVT is an EXCELLENT company, understands customer requirements & provides quality products. I have dealt with them for over many years."</p>
+            <img src="/img/screws.jpg" class="rounded-circle testimonial-img" alt="Arun Bhardwaj"
+                 style="width: 100px; height: 100px; object-fit: cover; margin: 20px auto; border: 3px solid #e63946; padding: 2px;">
+            <h5 class="mt-2">Arun Bhardwaj</h5>
+            <small>Engineer</small>
+          </div>
+        </div>
+
+        <!-- Testimonial 3 -->
+        <div class="carousel-item">
+          <div class="testimonial text-center">
+            <p class="testimonial-text" style="font-style: italic; color: #555;">"My experience with AVT has been an A1 experience. Client Services is very knowledgeable and cares enough to help me get exactly what we need."</p>
+            <img src="/img/screws.jpg" class="rounded-circle testimonial-img" alt="Yogesh Bansal"
+                 style="width: 100px; height: 100px; object-fit: cover; margin: 20px auto; border: 3px solid #e63946; padding: 2px;">
+            <h5 class="mt-2">Yogesh Bansal</h5>
+            <small>Engineer</small>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ✅ Navigation Controls -->
+      <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+      </button>
+
+      <!-- ✅ Indicators -->
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="0" class="active"></button>
+        <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="1"></button>
+        <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="2"></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- Contact -->
+<!-- ✅ Contact Section -->
+<div id="contact" style="max-width: 1200px; margin: 60px auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+  <h2 style="text-align: center; color: #004080; margin-bottom: 20px; padding-bottom: 10px;">Contact Us</h2>
+  <p style="text-align: center; margin-bottom: 30px; color: #444;">
+    If you have any questions or need assistance, please contact us using the details below.
+  </p>
+
+  <!-- Parallel Layout: Contact Details (Left) + Map (Right) -->
+  <div style="display: flex; gap: 40px; align-items: flex-start; margin-top: 20px; flex-wrap: wrap;">
+    
+    <!-- Left Column: Contact Details -->
+    <div style="flex: 1; min-width: 300px; padding: 20px; background: #f9f9f9; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+      <h3 style="color: #004080; margin-bottom: 15px; font-size: 1.3rem;">AVT Fastners Pvt. Ltd.</h3>
+      <p style="margin-bottom: 15px; line-height: 1.6;">
+        <strong>Address:</strong><br />
+        Plot No. 16, IDC Industrial Area, Hisar Road, Rohtak-124001, India
+      </p>
+      <p style="margin-bottom: 15px; line-height: 1.6;">
+        <strong>Phone:</strong><br />
+        +(91)-9812090620
+      </p>
+      <p style="margin-bottom: 15px; line-height: 1.6;">
+        <strong>Email:</strong><br />
+        <a href="mailto:info@avtfastners.com" style="color: #004080; text-decoration: none; font-weight: 600;">info@avtfastners.com</a>
+      </p>
+      <p style="margin-bottom: 0; line-height: 1.6;">
+        <strong>Working Hours:</strong><br />
+        Monday - Friday: 9:00 AM to 6:00 PM<br />
+        Saturday: 9:00 AM to 1:00 PM<br />
+        Sunday: Closed
+      </p>
+    </div>
+
+  <div style="flex:1; width:100%; border-radius:8px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,0.1);">
+
+  <iframe
+    src="https://www.google.com/maps/d/embed?mid=1wsBKb2y18eaPBfZYvWkmQ6ZO_xS1LDE&hl=en"
+    width="100%"
+    height="380"
+    style="border:0;"
+    loading="lazy">
+  </iframe>
+
+</div>
+
+
+  </div>
+</div>
+
+<!-- ✅ Enquiry Section -->
+<section id="enquiry" class="container my-5">
+  <div class="card shadow-lg border-0 mx-auto" style="max-width: 800px; border-radius: 15px;">
+    <div class="card-body p-5">
+      <h2 class="text-center mb-4 fw-bold" style="color: #004080;">Send Us an Enquiry</h2>
+
+      <p class="text-center mb-5 text-muted">
+        We’d love to hear from you! Please fill out the form below and our team will get back to you shortly.
+      </p>
+
+      <form id="enquiryForm">
+        <div class="mb-3">
+          <label for="name" class="form-label fw-semibold">Your Name</label>
+          <input type="text" id="name" name="name" class="form-control form-control-lg"
+                 placeholder="Enter your full name" required>
+        </div>
+
+        <div class="mb-3">
+          <label for="email" class="form-label fw-semibold">Your Email</label>
+          <input type="email" id="email" name="email" class="form-control form-control-lg"
+                 placeholder="Enter your email address" required>
+        </div>
+
+        <div class="mb-4">
+          <label for="message" class="form-label fw-semibold">Message</label>
+          <textarea id="message" name="message" rows="5"
+                    class="form-control form-control-lg"
+                    placeholder="Write your enquiry here..." required></textarea>
+        </div>
+
+        <div class="text-center">
+  <button type="submit" class="btn-inline-hover">Send Enquiry</button>
+</div>
+
+      </form>
+
+      <p id="responseMsg" class="text-center mt-4 fw-bold"></p>
+    </div>
+  </div>
+</section>
+
+<!-- ✅ Enquiry Form Script -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("enquiryForm");
+  const responseMsg = document.getElementById("responseMsg");
+
+  if (!form) return;
+
+  const submitBtn = form.querySelector("button[type='submit']");
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    submitBtn.disabled = true;
+    responseMsg.textContent = "Sending...";
+    responseMsg.classList.remove("text-success", "text-danger");
+
+    const data = {
+      name: form.name.value.trim(),
+      email: form.email.value.trim(),
+      message: form.message.value.trim()
+    };
+
+    try {
+      const response = await fetch("/api/enquiry", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      });
+
+      const result = await response.text();
+
+      if (response.ok) {
+        responseMsg.textContent = result;
+        responseMsg.classList.add("text-success");
+        form.reset();
+      } else {
+        responseMsg.textContent = result || "Failed to send enquiry. Please try again.";
+        responseMsg.classList.add("text-danger");
+      }
+    } catch (err) {
+      responseMsg.textContent = "Something went wrong. Please try again.";
+      responseMsg.classList.add("text-danger");
+    } finally {
+      submitBtn.disabled = false;
+    }
+  });
+});
+</script>
+
+
+
+<div id="social-connect">
+  <h2>Join Our Community</h2>
+
+  <div class="social-icons">
+    <a href="https://www.facebook.com/p/AVT-Fastners-61559642626581/" target="_blank" class="social-icon facebook">
+      <i class="fab fa-facebook-f"></i>
+    </a>
+    <a href="https://in.linkedin.com/company/avtfastners" target="_blank" class="social-icon linkedin">
+      <i class="fab fa-linkedin-in"></i>
+    </a>
+  </div>
+</div>
+
+
+
+
+
+
+<!-- ✅ Font Awesome (needed for icons) -->
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+
+ <div th:replace="fragments/footer :: footer"></div>
+ 
+ <script>
+
+document.addEventListener("DOMContentLoaded", function(){
+
+  const menuBtn = document.getElementById("mobile-menu");
+  const navList = document.getElementById("nav-list");
+
+  if(menuBtn){
+    menuBtn.addEventListener("click", function(){
+      navList.classList.toggle("active");
+    });
+  }
+
+  /* MOBILE DROPDOWN FIX */
+
+  const dropdownLinks = document.querySelectorAll(".dropdown > a");
+
+  dropdownLinks.forEach(link => {
+    link.addEventListener("click", function(e){
+
+      if(window.innerWidth <= 768){
+
+        e.preventDefault();
+
+        const submenu = this.nextElementSibling;
+
+        if(submenu){
+          submenu.classList.toggle("show");
+        }
+
+      }
+
+    });
+  });
+
+});
+
+</script>
+
+ 
+ 
+<script>
+  let currentSlideIndex = 0;
+  const slides = document.querySelectorAll('.carousel-slide');
+  const dots = document.querySelectorAll('.dot');
+  const totalSlides = slides.length;
+
+  function showSlide(index) {
+    slides.forEach(s => s.classList.remove('active'));
+    dots.forEach(d => d.classList.remove('active'));
+    currentSlideIndex = index;
+    if (currentSlideIndex >= totalSlides) currentSlideIndex = 0;
+    if (currentSlideIndex < 0) currentSlideIndex = totalSlides - 1;
+    slides[currentSlideIndex].classList.add('active');
+    dots[currentSlideIndex].classList.add('active');
+  }
+
+  function nextSlide() { showSlide(currentSlideIndex + 1); }
+  setInterval(nextSlide, 4000);
+  function currentSlide(n) { showSlide(n); }
+</script>
+
+<!-- Bootstrap Bundle with Popper (needed for carousel controls) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+
+</body>
+</html>

@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:fragment="Layout(content)">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title th:text="${title}">Admin Dashboard</title>
+
+<!-- AdminLTE & Third Party CSS -->
+<link rel="stylesheet" th:href="@{/dashboard/css/adminlte.css}" />
+<!-- Your Custom Dashboard CSS -->
+<link rel="stylesheet" th:href="@{/css/dashboard.css}" />
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.11.0/styles/overlayscrollbars.min.css" />
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/apexcharts@3.37.1/dist/apexcharts.css" />
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/jsvectormap@1.5.3/dist/css/jsvectormap.min.css" />
+
+</head>
+<body class="layout-fixed bg-body-tertiary">
+
+
+	<!-- App Wrapper -->
+	<div class="app-wrapper-fluid px-3">
+
+		<!-- Header / Navbar -->
+<nav class="app-header navbar navbar-expand navbar-dark bg-secondary">
+
+<div class="container-fluid">
+
+<!-- Left Side -->
+<ul class="navbar-nav">
+
+<li class="nav-item">
+<span class="nav-link text-white fw-bold">
+
+Welcome:
+<span th:if="${user != null}" th:text="${user.name}"></span>
+<span th:unless="${user != null}">Guest</span>
+
+</span>
+</li>
+
+</ul>
+
+
+<!-- Right Side -->
+<ul class="navbar-nav ms-auto">
+
+<li class="nav-item">
+
+<form th:action="@{/logout}" method="post">
+
+<button type="submit" class="btn btn-light btn-sm">
+
+<i class="bi bi-box-arrow-right"></i> Sign Out
+
+</button>
+
+</form>
+
+</li>
+
+</ul>
+
+</div>
+
+</nav>
+
+
+		<!-- Sidebar -->
+		
+
+		<!-- Main Content -->
+
+		<div class="content">
+			<!-- Success & Error Messages -->
+			<div class="container mt-3">
+				<div th:if="${message}" id="successMessage"
+					class="alert alert-success text-center" th:text="${message}"></div>
+				<div th:if="${error}" id="errorMessage"
+					class="alert alert-danger text-center" th:text="${error}"></div>
+			</div>
+
+			<!-- Page-specific content -->
+			<div th:insert="${content}"></div>
+
+
+		</div>
+
+	</div>
+	<!--begin::Footer-->
+	<footer class="app-footer text-center">
+		<!--begin::To the end-->
+
+		<!--end::To the end-->
+		<!--begin::Copyright-->
+		<strong> &copy; 2025 AVT Fastners Pvt. Ltd. All rights
+			reserved. </strong> All rights reserved.
+		<!--end::Copyright-->
+	</footer>
+	<!--end::Footer-->
+	</div>
+	<!--end::App Wrapper-->
+	<!--begin::Script-->
+	<!--begin::Third Party Plugin(OverlayScrollbars)-->
+	<script
+		src="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.11.0/browser/overlayscrollbars.browser.es6.min.js"
+		crossorigin="anonymous"></script>
+	<!--end::Third Party Plugin(OverlayScrollbars)-->
+	<!--begin::Required Plugin(popperjs for Bootstrap 5)-->
+	<script
+		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+		crossorigin="anonymous"></script>
+	<!--end::Required Plugin(popperjs for Bootstrap 5)-->
+	<!--begin::Required Plugin(Bootstrap 5)-->
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.min.js"
+		crossorigin="anonymous"></script>
+	<!--end::Required Plugin(Bootstrap 5)-->
+	<!--begin::Required Plugin(AdminLTE)-->
+	<script th:src="@{/dashboard/js/adminlte.js}"></script>
+
+	<!--end::Required Plugin(AdminLTE)-->
+	<!--begin::OverlayScrollbars Configure-->
+	<script>
+      const SELECTOR_SIDEBAR_WRAPPER = '.sidebar-wrapper';
+      const Default = {
+        scrollbarTheme: 'os-theme-light',
+        scrollbarAutoHide: 'leave',
+        scrollbarClickScroll: true,
+      };
+      document.addEventListener('DOMContentLoaded', function () {
+        const sidebarWrapper = document.querySelector(SELECTOR_SIDEBAR_WRAPPER);
+        if (sidebarWrapper && OverlayScrollbarsGlobal?.OverlayScrollbars !== undefined) {
+          OverlayScrollbarsGlobal.OverlayScrollbars(sidebarWrapper, {
+            scrollbars: {
+              theme: Default.scrollbarTheme,
+              autoHide: Default.scrollbarAutoHide,
+              clickScroll: Default.scrollbarClickScroll,
+            },
+          });
+        }
+      });
+    </script>
+	<!--end::OverlayScrollbars Configure-->
+	<!-- OPTIONAL SCRIPTS -->
+	<!-- sortablejs -->
+	<script
+		src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"
+		crossorigin="anonymous"></script>
+	<!-- sortablejs -->
+	<script>
+      new Sortable(document.querySelector('.connectedSortable'), {
+        group: 'shared',
+        handle: '.card-header',
+      });
+
+      const cardHeaders = document.querySelectorAll('.connectedSortable .card-header');
+      cardHeaders.forEach((cardHeader) => {
+        cardHeader.style.cursor = 'move';
+      });
+    </script>
+
+	
+
+	
+	<script>
+let idleTime = 0;
+const idleLimit = 600; // seconds (testing)
+
+function resetIdleTimer() {
+  idleTime = 0;
+}
+
+setInterval(function() {
+  idleTime++;
+  if (idleTime >= idleLimit) {
+    // Call Spring Security logout
+    fetch('/logout', { method: 'POST' }) // Spring handles this
+      .then(() => {
+        window.location.href = "/signin"; // redirect after logout
+      })
+      .catch(err => {
+        console.error("Logout failed", err);
+        window.location.href = "/signin"; // fallback
+      });
+  }
+}, 1000);
+
+// Reset timer on user activity
+window.onload = resetIdleTimer;
+document.onmousemove = resetIdleTimer;
+document.onkeypress = resetIdleTimer;
+document.onscroll = resetIdleTimer;
+</script>
+
+
+	<!-- Scripts -->
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js"
+		crossorigin="anonymous"></script>
+	<script th:src="@{/js/script.js}"></script>
+
+	<script>
+        function toggleSidebar() {
+            document.querySelector('.sidebar').classList.toggle('show');
+        }
+
+        // Auto fade alerts
+        window.addEventListener('DOMContentLoaded', () => {
+            const successMsg = document.getElementById('successMessage');
+            if(successMsg) { setTimeout(() => successMsg.remove(), 3000); }
+
+            const errorMsg = document.getElementById('errorMessage');
+            if(errorMsg) { setTimeout(() => errorMsg.remove(), 3000); }
+        });
+    </script>
+
+</body>
+</html>

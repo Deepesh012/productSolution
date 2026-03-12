@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{base::Layout(~{::section})}">
+<head>
+    <meta charset="UTF-8" />
+    <title>AVT Fastners</title>
+    
+</head>
+<body>
+    <section th:fragment="section">
+      <div class="container mb-5">
+<div class="card p-4">
+    <h3>Replace video for: <span th:text="${video.type}">type</span></h3>
+
+    
+    <form th:action="@{/youtube/replace/{type}(type=${video.type})}" method="post">
+      <div class="mb-3">
+        <label for="videoUrl" class="form-label">YouTube link or local path</label>
+        <input id="videoUrl" name="videoUrl" type="text" class="form-control"
+               th:value="${video.videoUrl}" placeholder="https://youtu.be/... or /videos/filename.mp4" required />
+        <div class="form-text">You can paste a YouTube watch link (it will be converted), or a local path starting with /videos/</div>
+      </div>
+      <button class="btn btn-primary" type="submit">Replace</button>
+      <a th:href="@{/user/dashboard}" class="btn btn-secondary ms-2">Back</a>
+    </form>
+
+    <hr/>
+
+    
+  <div th:if="${video.videoUrl != null}" 
+     style="text-align:center; margin-top:20px;">
+
+<h5 style="color:#004080; margin-bottom:15px;">
+Current Preview
+</h5>
+
+<div style="max-width:640px; margin:auto;">
+
+<div th:if="${video.videoUrl.startsWith('/videos/')}" class="ratio ratio-16x9">
+<video controls style="border-radius:8px; box-shadow:0 2px 10px rgba(0,0,0,0.2);">
+<source th:src="@{${video.videoUrl}}" type="video/mp4"/>
+</video>
+</div>
+
+<div th:if="${!video.videoUrl.startsWith('/videos/')}" class="ratio ratio-16x9">
+<iframe th:src="${video.videoUrl}" frameborder="0" allowfullscreen
+style="border-radius:8px; box-shadow:0 2px 10px rgba(0,0,0,0.2);"></iframe>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+  </div>
+  </div>
+
+    </section>
+    
+</body>
+</html>

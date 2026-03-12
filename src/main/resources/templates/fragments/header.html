@@ -1,0 +1,71 @@
+<!-- src/main/resources/templates/fragments/header.html -->
+
+<header th:fragment="siteHeader">
+
+  <!-- Logo -->
+  <div class="logo">
+    <a th:href="@{/}">
+      <img src="/img/avtfast_logo.png" alt="AVT Fastners Logo"/>
+    </a>
+  </div>
+
+  <!-- Mobile Hamburger -->
+  <div class="menu-toggle" id="mobile-menu">
+    ☰
+  </div>
+
+  <!-- Navigation -->
+  <nav>
+    <ul id="nav-list">
+
+      <li><a th:href="@{/}">Home</a></li>
+
+      <li class="dropdown">
+        <a href="#">Product Solutions</a>
+        <ul class="dropdown-content">
+          <li><a href="/product/show_fastners">Fasteners</a></li>
+          <li><a href="#nuts">Nuts</a></li>
+          <li><a href="#bolts">Bolts</a></li>
+          <li><a href="#screws">Screws</a></li>
+          <li><a href="#threaded-rod">Threaded Rod</a></li>
+          <li><a href="#hose-clamp">Hose Clamp</a></li>
+        </ul>
+      </li>
+
+      <li>
+        <a href="http://localhost:8200/#testimonial">Our Team</a>
+      </li>
+
+      <li class="dropdown">
+        <a href="http://localhost:8200/#news">News & Media</a>
+        <ul class="dropdown-content">
+          <li><a href="http://localhost:8200/#news">News</a></li>
+          <li><a href="http://localhost:8200/#media">Exhibition</a></li>
+        </ul>
+      </li>
+
+      <li>
+        <a href="http://localhost:8200/#contact">Contact Us</a>
+      </li>
+
+      <li>
+        <a href="/organization-chart/latest" target="_blank">Organization Chart</a>
+      </li>
+
+      <li class="dropdown">
+        <a href="#">About Us</a>
+        <ul class="dropdown-content">
+          <li><a href="http://localhost:8200/#about">Company Profile</a></li>
+          <li><a href="http://localhost:8200/#about">Vision and Mission</a></li>
+          <li><a href="http://localhost:8200/#about">Director Message</a></li>
+        </ul>
+      </li>
+
+      <li>
+        <a th:href="@{/signin}">Login</a>
+      </li>
+
+    </ul>
+  </nav>
+
+</header>
