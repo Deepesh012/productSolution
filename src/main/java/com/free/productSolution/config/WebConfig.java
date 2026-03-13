@@ -35,11 +35,6 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addResourceHandler("/fastners/**")
                 .addResourceLocations("file:" + absolutePath + "/fastners/");
         
-     // Serve all /uploads/** URLs from this folder
-        registry.addResourceHandler("/uploads/**")
-                .addResourceLocations("file:" + uploadDir + "/");
-
-        
     }
 
 }
