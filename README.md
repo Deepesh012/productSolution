@@ -1077,3 +1077,7 @@ The long-term goal of Product Solution is to evolve the application from a tradi
 ```
 
 The project therefore serves as both a **real-world business application** and a practical platform for implementing modern **Java, Cloud and DevOps engineering practices**.
+
+
+## DevOps Practice
+This project is being used to practice Git, GitHub, CI/CD, Docker, and DevOps.
