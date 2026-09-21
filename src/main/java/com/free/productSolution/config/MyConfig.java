@@ -51,14 +51,25 @@ public class MyConfig {
                 )
             
             .authorizeHttpRequests(auth -> auth
+            		.requestMatchers(
+                            "/", "/index",
+                            "/media",              // 👈 allow main media page
+                            "/youtube/**",         // 👈 allow "more" page
+                            "/news/**",            // 👈 for news fetch API
+                            "/css/**", "/js/**", "/img/**", "/videos/**"
+                        ).permitAll()
+            		
+            		
                 .requestMatchers("/dashboard/**").authenticated()
                 .requestMatchers("/user/**").authenticated()
                 .requestMatchers("/carousel").authenticated()
-                .requestMatchers("/media*").authenticated()
+                
                 .requestMatchers("/youtube/replace/**").authenticated()
                 .requestMatchers("/organization-chart/upload").authenticated()
                 .requestMatchers("/news/manage-news").authenticated()
                                 .anyRequest().permitAll()
+                  // 🌐 Public routes (no login required)
+                 
             )
             .formLogin(login -> login
                 .loginPage("/signin")

@@ -1,126 +1,141 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AVT Fastners Pvt. Ltd.</title>
-  <link rel="stylesheet" href="css/style.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <!-- Bootstrap CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  
-  
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AVT Fastners Pvt. Ltd.</title>
+<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+<!-- Bootstrap CSS -->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+
+
 </head>
 <body>
 
- 
-
-<div th:replace="fragments/header :: siteHeader"></div>
 
 
-<!-- ✅ Hero Carousel -->
-<div class="hero-carousel">
-  <div th:each="img, stat : ${carouselImages}" 
-       th:classappend="${stat.index == 0} ? 'active' : ''"
-       th:style="|background-image: url('${img.imageUrl}')|"
-       class="carousel-slide">
-  </div>
-
-  <div class="carousel-dots">
-    <span th:each="img, stat : ${carouselImages}"
-          th:classappend="${stat.index == 0} ? 'dot active' : 'dot'"
-          th:onclick="'currentSlide(' + ${stat.index} + ')'" class="dot"></span>
-  </div>
-</div>
+	<div th:replace="fragments/header :: siteHeader"></div>
 
 
+	<!-- ✅ Hero Carousel -->
+	<div class="hero-carousel">
+		<div th:each="img, stat : ${carouselImages}"
+			th:classappend="${stat.index == 0} ? 'active' : ''"
+			th:style="|background-image: url('${img.imageUrl}')|"
+			class="carousel-slide"></div>
 
-<!-- Main Content (unchanged from your original index.html) -->
-<main>
-  <!-- Product Solutions -->
-  <section id="productImage">
-    <img th:src="@{${banner1.imageUrl}}" alt="Product Solutions" />
-    <div class="content">
-      <h2 th:text="${banner1.heading}">Product Solutions</h2>
-    <p th:utext="${banner1.description}">Default description here</p>
-    </div>
-  </section>
+		<!-- ✅ LEFT ARROW -->
+		<button class="carousel-arrow left" onclick="prevSlide()">&#10094;</button>
 
-  <!-- Assembly Technology -->
-  <section id="assembly-technology">
-    <img th:src="@{${banner2.imageUrl}}" alt="Assembly Technology Expert" />
-    <div class="content">
-      <h2 th:text="${banner2.heading}">Weight Chart</h2>
-    <p th:utext="${banner2.description}">Default description here</p>
-    </div>
-  </section>
-
-  <!-- Smart Factory -->
-  <section id="smart-factory">
-    <img th:src="@{${banner3.imageUrl}}" alt="Smart Factory Logistics" />
-    <div class="content">
-       <h2 th:text="${banner3.heading}">Smart Factory Logistics</h2>
-    <p th:utext="${banner3.description}">Default description here</p>
-    </div>
-  </section>
-</main>
-
-<!-- News & Media -->
-<section class="news-media-section">
-  <!-- News Section -->
-  <div class="news-section" id="news">
-    <h2><i class="fas fa-arrow-up-right-from-square"></i> News & Updates</h2>
-    <div class="news-wrapper">
-      <div class="news-list" id="newsList">
-        <!-- News items will be injected dynamically -->
-      </div>
-    </div>
-  </div>
-
-  <!-- Media Section -->
-<div class="media-section" id="media">
-  <h2>Media</h2>
-
-  <div class="media-video" th:if="${video != null}">
-    <!-- Local mp4 -->
-    <div th:if="${video.videoUrl != null and video.videoUrl.startsWith('/videos/')}">
-      <video width="640" height="360" controls>
-        <source th:src="@{${video.videoUrl}}" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
-    </div>
-
-    <!-- YouTube embed or external iframe URL -->
-    <div th:if="${video.videoUrl != null and !video.videoUrl.startsWith('/videos/')}">
-      <iframe width="640" height="360" th:src="${video.videoUrl}" frameborder="0" allowfullscreen></iframe>
-    </div>
-  </div>
-
-  <div th:unless="${video != null}">
-    <p>No video configured</p>
-  </div>
-
-  
+		<!-- ✅ RIGHT ARROW -->
+		<button class="carousel-arrow right" onclick="nextSlide()">&#10095;</button>
 
 
-
-
-	<!-- ✅ Link to more videos page -->
-	  <div class="more-videos" style="text-align: right; margin-top: 10px;">
-	    <a th:href="@{/youtube/more}" class="btn-inline-hover" style="text-decoration: none;">more</a>
-	  </div>
+		<div class="carousel-dots">
+			<span th:each="img, stat : ${carouselImages}"
+				th:classappend="${stat.index == 0} ? 'dot active' : 'dot'"
+				th:onclick="'currentSlide(' + ${stat.index} + ')'" class="dot"></span>
+		</div>
 	</div>
 
 
 
-  </div>
-</div>
+	<!-- Main Content (unchanged from your original index.html) -->
+	<main>
+		<!-- Product Solutions -->
+		<section id="productImage">
+			<img th:src="@{${banner1.imageUrl}}" alt="Product Solutions" />
+			<div class="content">
+				<h2 th:text="${banner1.heading}">Product Solutions</h2>
+				<p th:utext="${banner1.description}">Default description here</p>
+			</div>
+		</section>
 
-</section>
+		<!-- Assembly Technology -->
+		<section id="assembly-technology">
+			<img th:src="@{${banner2.imageUrl}}" alt="Assembly Technology Expert" />
+			<div class="content">
+				<h2 th:text="${banner2.heading}">Weight Chart</h2>
+				<p th:utext="${banner2.description}">Default description here</p>
+			</div>
+		</section>
+
+		<!-- Smart Factory -->
+		<section id="smart-factory">
+			<img th:src="@{${banner3.imageUrl}}" alt="Smart Factory Logistics" />
+			<div class="content">
+				<h2 th:text="${banner3.heading}">Smart Factory Logistics</h2>
+				<p th:utext="${banner3.description}">Default description here</p>
+			</div>
+		</section>
+	</main>
+
+	<!-- News & Media -->
+	<section class="news-media-section">
+		<!-- News Section -->
+		<div class="news-section" id="news">
+			<h2>
+				<i class="fas fa-arrow-up-right-from-square"></i> News & Updates
+			</h2>
+			<div class="news-wrapper">
+				<div class="news-list" id="newsList">
+					<!-- News items will be injected dynamically -->
+				</div>
+			</div>
+		</div>
+
+		<!-- Media Section -->
+		<div class="media-section" id="media">
+			<h2>Media</h2>
+
+			<div class="media-video" th:if="${video != null}">
+				<!-- Local mp4 -->
+				<div
+					th:if="${video.videoUrl != null and video.videoUrl.startsWith('/videos/')}">
+					<video width="640" height="360" controls>
+						<source th:src="@{${video.videoUrl}}" type="video/mp4" />
+						Your browser does not support the video tag.
+					</video>
+				</div>
+
+				<!-- YouTube embed or external iframe URL -->
+				<div
+					th:if="${video.videoUrl != null and !video.videoUrl.startsWith('/videos/')}">
+					<iframe width="640" height="360" th:src="${video.videoUrl}"
+						frameborder="0" allowfullscreen></iframe>
+				</div>
+			</div>
+
+			<div th:unless="${video != null}">
+				<p>No video configured</p>
+			</div>
 
 
 
-<script>
+
+
+
+			<!-- ✅ Link to more videos page -->
+			<div class="more-videos" style="text-align: right; margin-top: 10px;">
+				<a th:href="@{/youtube/more}" class="btn-inline-hover"
+					style="text-decoration: none;">more</a>
+			</div>
+		</div>
+
+
+
+		</div>
+		</div>
+
+	</section>
+
+
+
+	<script>
   let scrollInterval; // Global interval reference
 
   document.addEventListener("DOMContentLoaded", async () => {
@@ -183,210 +198,643 @@ function startScroll() {
   }
 </script>
 
+<!-- Growth Section -->
 
-<!-- About Us + Testimonials Section -->
-<section id="about" 
-         style="margin: 60px auto; 
-                padding: 40px; 
-                background: #fff;
-                border-radius: 12px; 
-                box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-                max-width: 1200px;">
+<a th:href="@{/growth}" class="growth-preview">
 
-  <!-- Flex Layout -->
-  <div style="display: flex; align-items: center; gap: 40px; flex-wrap: wrap;">
+<section class="growth-home py-5">
 
-    <!-- Left: Text -->
-    <div style="flex: 2; color: #444; line-height: 1.8; font-size: 1rem;">
-      <p style="font-style: italic; color: #888;">Manufacturer & Supplier</p>
-      <h2 style="font-weight: bold; font-size: 2rem; margin-bottom: 10px;">ABOUT US</h2>
-      <hr style="width: 60px; border: 2px solid #e63946; margin: 15px 0;">
-      <p>
-        Keeping quality and client satisfaction as our foundation stone, we,
-        <strong>AVT Fastners</strong>, forayed into the business of manufacturing,
-        supplying, and trading a wide range of Fasteners & Stainless Steel Screws. 
-        Our products are known all over India for their quality, durability, and 
-        high load bearing strength.
-      </p>
-      <p>
-        We would like to introduce ourselves as the best industrial fastener 
-        manufacturer in Rohtak as well as the best industrial fastener supplier in Rohtak.
-      </p>
-      <p>
-        We also manufacture hex bolts, socket head cap bolts, collar bolts, studs, 
-        counter sunk skew, high tensile bolts, and high tensile fasteners with best 
-        quality & support all over in Rohtak. Call us or enquire for all types of 
-        industrial fasteners & bolts in Rohtak.
-      </p>
+    <div class="container">
+
+        <div class="row align-items-center">
+
+            <!-- Image -->
+            <div class="col-lg-6 mb-4 mb-lg-0">
+
+                <img src="/img/gallery/Growth.png"
+                     class="img-fluid growth-image"
+                     alt="Company Growth">
+
+            </div>
+
+            <!-- Content -->
+            <div class="col-lg-6">
+
+                <h2>Our Growth Journey</h2>
+
+                <p>
+
+                    Since our establishment, AVT Fastners has consistently
+                    expanded its manufacturing capacity, infrastructure,
+                    and customer base. Through continuous innovation,
+                    quality products, and customer satisfaction,
+                    we have transformed into one of India's trusted
+                    fastener manufacturers.
+
+                </p>
+
+                <ul class="growth-list">
+
+                    <li>✔ Rapid Machinery Expansion</li>
+
+                    <li>✔ Strong Revenue Growth</li>
+
+                    <li>✔ Modern Infrastructure</li>
+
+                </ul>
+
+                <button class="btn btn-danger mt-3">
+
+                    Explore Our Growth
+
+                </button>
+
+            </div>
+
+        </div>
+
     </div>
 
-    <!-- Right: Image -->
-    <!-- Right: Image -->
-<div style="flex: 1; text-align: center; background: transparent; box-shadow: none;">
-  <img src="/img/avtfast_logo.png" alt="About Us" 
-       style="max-width: 100%; object-fit: contain; border-radius: 0; box-shadow: none;">
-</div>
-
-
-  </div>
-
-  <!-- ✅ Testimonials Section -->
-  <div class="testimonials-section"  id="testimonial"
-       style="margin-top: 60px; padding: 30px; background: #f9f9f9; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.08);">
-    <h2 class="text-center" style="font-weight: bold;"><u>Testimonials</u></h2>
-    <h3 class="text-center mb-4" style="color: #444; font-size: 1.3rem;">WHAT PEOPLE SAY</h3>
-
-    <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
-      <div class="carousel-inner">
-
-        <!-- Testimonial 1 -->
-        <div class="carousel-item active">
-          <div class="testimonial text-center">
-            <p class="testimonial-text" style="font-style: italic; color: #555;">"AVT has been the best supplier I have worked with by far! The quality and price of the product is excellent. I feel valued by them."</p>
-            <img src="/img/screws.jpg" class="rounded-circle testimonial-img" alt="Yogender Goel"
-                 style="width: 100px; height: 100px; object-fit: cover; margin: 20px auto; border: 3px solid #e63946; padding: 2px;">
-            <h5 class="mt-2">Yogender Goel</h5>
-            <small>Engineer</small>
-          </div>
-        </div>
-
-        <!-- Testimonial 2 -->
-        <div class="carousel-item">
-          <div class="testimonial text-center">
-            <p class="testimonial-text" style="font-style: italic; color: #555;">"AVT is an EXCELLENT company, understands customer requirements & provides quality products. I have dealt with them for over many years."</p>
-            <img src="/img/screws.jpg" class="rounded-circle testimonial-img" alt="Arun Bhardwaj"
-                 style="width: 100px; height: 100px; object-fit: cover; margin: 20px auto; border: 3px solid #e63946; padding: 2px;">
-            <h5 class="mt-2">Arun Bhardwaj</h5>
-            <small>Engineer</small>
-          </div>
-        </div>
-
-        <!-- Testimonial 3 -->
-        <div class="carousel-item">
-          <div class="testimonial text-center">
-            <p class="testimonial-text" style="font-style: italic; color: #555;">"My experience with AVT has been an A1 experience. Client Services is very knowledgeable and cares enough to help me get exactly what we need."</p>
-            <img src="/img/screws.jpg" class="rounded-circle testimonial-img" alt="Yogesh Bansal"
-                 style="width: 100px; height: 100px; object-fit: cover; margin: 20px auto; border: 3px solid #e63946; padding: 2px;">
-            <h5 class="mt-2">Yogesh Bansal</h5>
-            <small>Engineer</small>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- ✅ Navigation Controls -->
-      <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon"></span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
-        <span class="carousel-control-next-icon"></span>
-      </button>
-
-      <!-- ✅ Indicators -->
-      <div class="carousel-indicators">
-        <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="0" class="active"></button>
-        <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="1"></button>
-        <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="2"></button>
-      </div>
-    </div>
-  </div>
 </section>
 
+</a>
 
 
-<!-- Contact -->
-<!-- ✅ Contact Section -->
-<div id="contact" style="max-width: 1200px; margin: 60px auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-  <h2 style="text-align: center; color: #004080; margin-bottom: 20px; padding-bottom: 10px;">Contact Us</h2>
-  <p style="text-align: center; margin-bottom: 30px; color: #444;">
-    If you have any questions or need assistance, please contact us using the details below.
-  </p>
+<!-- Our Clients for Desktop -->
+<section class="gallery-section py-5">
+    <div class="container d-none d-md-block">
 
-  <!-- Parallel Layout: Contact Details (Left) + Map (Right) -->
-  <div style="display: flex; gap: 40px; align-items: flex-start; margin-top: 20px; flex-wrap: wrap;">
-    
-    <!-- Left Column: Contact Details -->
-    <div style="flex: 1; min-width: 300px; padding: 20px; background: #f9f9f9; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
-      <h3 style="color: #004080; margin-bottom: 15px; font-size: 1.3rem;">AVT Fastners Pvt. Ltd.</h3>
-      <p style="margin-bottom: 15px; line-height: 1.6;">
-        <strong>Address:</strong><br />
-        Plot No. 16, IDC Industrial Area, Hisar Road, Rohtak-124001, India
-      </p>
-      <p style="margin-bottom: 15px; line-height: 1.6;">
-        <strong>Phone:</strong><br />
-        +(91)-9812090620
-      </p>
-      <p style="margin-bottom: 15px; line-height: 1.6;">
-        <strong>Email:</strong><br />
-        <a href="mailto:info@avtfastners.com" style="color: #004080; text-decoration: none; font-weight: 600;">info@avtfastners.com</a>
-      </p>
-      <p style="margin-bottom: 0; line-height: 1.6;">
-        <strong>Working Hours:</strong><br />
-        Monday - Friday: 9:00 AM to 6:00 PM<br />
-        Saturday: 9:00 AM to 1:00 PM<br />
-        Sunday: Closed
-      </p>
+        <h2 class="text-center mb-4">Our Clients</h2>
+
+        <div id="galleryCarousel" class="carousel slide" data-bs-ride="carousel">
+
+            <div class="carousel-inner">
+
+                <!-- Slide 1 -->
+                <div class="carousel-item active">
+                    <div class="row g-3">
+
+                        <div class="col-4 col-md-2">
+                            <img src="/img/gallery/airtel.png" class="gallery-img" alt="">
+                        </div>
+
+                        <div class="col-4 col-md-2">
+                            <img src="/img/gallery/ather logo.png" class="gallery-img" alt="">
+                        </div>
+
+                        <div class="col-4 col-md-2">
+                            <img src="/img/gallery/bsnk.png" class="gallery-img" alt="">
+                        </div>
+
+                        <div class="col-4 col-md-2 d-none d-md-block">
+                            <img src="/img/gallery/dixon.png" class="gallery-img" alt="">
+                        </div>
+
+                        <div class="col-4 col-md-2 d-none d-md-block">
+                            <img src="/img/gallery/geon logo.jpeg" class="gallery-img" alt="">
+                        </div>
+
+                        <div class="col-4 col-md-2 d-none d-md-block">
+                            <img src="/img/gallery/gi.jpeg" class="gallery-img" alt="">
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Slide 2 -->
+                <div class="carousel-item">
+                    <div class="row g-3">
+
+                        <div class="col-4 col-md-2">
+                            <img src="/img/gallery/injectoplast.jpeg" class="gallery-img" alt="">
+                        </div>
+
+                        <div class="col-4 col-md-2">
+                            <img src="/img/gallery/jaguar logo.png" class="gallery-img" alt="">
+                        </div>
+
+                        <div class="col-4 col-md-2">
+                            <img src="/img/gallery/jio.png" class="gallery-img" alt="">
+                        </div>
+
+                        <div class="col-4 col-md-2 d-none d-md-block">
+                            <img src="/img/gallery/kimbal.png" class="gallery-img" alt="">
+                        </div>
+
+                        <div class="col-4 col-md-2 d-none d-md-block">
+                            <img src="/img/gallery/landrover.jpeg" class="gallery-img" alt="">
+                        </div>
+
+                        <div class="col-4 col-md-2 d-none d-md-block">
+                            <img src="/img/gallery/luminous.jpeg" class="gallery-img" alt="">
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Slide 3 -->
+                <div class="carousel-item">
+                    <div class="row g-3">
+
+                        <div class="col-4 col-md-2">
+                            <img src="/img/gallery/mercedes.jpeg" class="gallery-img" alt="">
+                        </div>
+
+                        <div class="col-4 col-md-2">
+                            <img src="/img/gallery/napino.png" class="gallery-img" alt="">
+                        </div>
+
+                        <div class="col-4 col-md-2">
+                            <img src="/img/gallery/panasonic.png" class="gallery-img" alt="">
+                        </div>
+
+                        <div class="col-4 col-md-2 d-none d-md-block">
+                            <img src="/img/gallery/Screenshot 2026-06-25 170206.png" class="gallery-img" alt="">
+                        </div>
+
+                        <div class="col-4 col-md-2 d-none d-md-block">
+                            <img src="/img/gallery/tvs logo.png" class="gallery-img" alt="">
+                        </div>
+
+                        <div class="col-4 col-md-2 d-none d-md-block">
+                            <img src="/img/gallery/volvo.jpeg" class="gallery-img" alt="">
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Previous -->
+            <button class="carousel-control-prev"
+                type="button"
+                data-bs-target="#galleryCarousel"
+                data-bs-slide="prev">
+
+                <span class="carousel-control-prev-icon"></span>
+
+            </button>
+
+            <!-- Next -->
+            <button class="carousel-control-next"
+                type="button"
+                data-bs-target="#galleryCarousel"
+                data-bs-slide="next">
+
+                <span class="carousel-control-next-icon"></span>
+
+            </button>
+
+        </div>
+
     </div>
+	<!-- Client page for Mobile screen -->
+	<div class="d-block d-md-none">
 
-  <div style="flex:1; width:100%; border-radius:8px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,0.1);">
+		<h2 class="text-center mb-4">Our Clients</h2>
+		
+	<div id="galleryCarouselMobile"
+	     class="carousel slide"
+	     data-bs-ride="carousel"
+	     data-bs-interval="2500">
 
-  <iframe
-    src="https://www.google.com/maps/d/embed?mid=1wsBKb2y18eaPBfZYvWkmQ6ZO_xS1LDE&hl=en"
-    width="100%"
-    height="380"
-    style="border:0;"
-    loading="lazy">
-  </iframe>
+	<div class="carousel-inner">
 
-</div>
+	<!-- Slide 1 -->
+	<div class="carousel-item active">
+	<div class="row g-3">
 
+	<div class="col-4">
+	<img src="/img/gallery/airtel.png" class="gallery-img">
+	</div>
 
-  </div>
-</div>
+	<div class="col-4">
+	<img src="/img/gallery/ather logo.png" class="gallery-img">
+	</div>
 
-<!-- ✅ Enquiry Section -->
-<section id="enquiry" class="container my-5">
-  <div class="card shadow-lg border-0 mx-auto" style="max-width: 800px; border-radius: 15px;">
-    <div class="card-body p-5">
-      <h2 class="text-center mb-4 fw-bold" style="color: #004080;">Send Us an Enquiry</h2>
+	<div class="col-4">
+	<img src="/img/gallery/bsnk.png" class="gallery-img">
+	</div>
 
-      <p class="text-center mb-5 text-muted">
-        We’d love to hear from you! Please fill out the form below and our team will get back to you shortly.
-      </p>
+	</div>
+	</div>
 
-      <form id="enquiryForm">
-        <div class="mb-3">
-          <label for="name" class="form-label fw-semibold">Your Name</label>
-          <input type="text" id="name" name="name" class="form-control form-control-lg"
-                 placeholder="Enter your full name" required>
-        </div>
+	<!-- Slide 2 -->
 
-        <div class="mb-3">
-          <label for="email" class="form-label fw-semibold">Your Email</label>
-          <input type="email" id="email" name="email" class="form-control form-control-lg"
-                 placeholder="Enter your email address" required>
-        </div>
+	<div class="carousel-item">
+	<div class="row g-3">
 
-        <div class="mb-4">
-          <label for="message" class="form-label fw-semibold">Message</label>
-          <textarea id="message" name="message" rows="5"
-                    class="form-control form-control-lg"
-                    placeholder="Write your enquiry here..." required></textarea>
-        </div>
+	<div class="col-4">
+	<img src="/img/gallery/dixon.png" class="gallery-img">
+	</div>
 
-        <div class="text-center">
-  <button type="submit" class="btn-inline-hover">Send Enquiry</button>
-</div>
+	<div class="col-4">
+	<img src="/img/gallery/geon logo.jpeg" class="gallery-img">
+	</div>
 
-      </form>
+	<div class="col-4">
+	<img src="/img/gallery/gi.jpeg" class="gallery-img">
+	</div>
 
-      <p id="responseMsg" class="text-center mt-4 fw-bold"></p>
-    </div>
-  </div>
+	</div>
+	</div>
+
+	<!-- Slide 3 -->
+
+	<div class="carousel-item">
+	<div class="row g-3">
+
+	<div class="col-4">
+	<img src="/img/gallery/injectoplast.jpeg" class="gallery-img">
+	</div>
+
+	<div class="col-4">
+	<img src="/img/gallery/jaguar logo.png" class="gallery-img">
+	</div>
+
+	<div class="col-4">
+	<img src="/img/gallery/jio.png" class="gallery-img">
+	</div>
+
+	</div>
+	</div>
+
+	<!-- Slide 4 -->
+
+	<div class="carousel-item">
+	<div class="row g-3">
+
+	<div class="col-4">
+	<img src="/img/gallery/kimbal.png" class="gallery-img">
+	</div>
+
+	<div class="col-4">
+	<img src="/img/gallery/landrover.jpeg" class="gallery-img">
+	</div>
+
+	<div class="col-4">
+	<img src="/img/gallery/luminous.jpeg" class="gallery-img">
+	</div>
+
+	</div>
+	</div>
+
+	<!-- Slide 5 -->
+
+	<div class="carousel-item">
+	<div class="row g-3">
+
+	<div class="col-4">
+	<img src="/img/gallery/mercedes.jpeg" class="gallery-img">
+	</div>
+
+	<div class="col-4">
+	<img src="/img/gallery/napino.png" class="gallery-img">
+	</div>
+
+	<div class="col-4">
+	<img src="/img/gallery/panasonic.png" class="gallery-img">
+	</div>
+
+	</div>
+	</div>
+
+	<!-- Slide 6 -->
+
+	<div class="carousel-item">
+	<div class="row g-3">
+
+	<div class="col-4">
+	<img src="/img/gallery/Screenshot 2026-06-25 170206.png" class="gallery-img">
+	</div>
+
+	<div class="col-4">
+	<img src="/img/gallery/tvs logo.png" class="gallery-img">
+	</div>
+
+	<div class="col-4">
+	<img src="/img/gallery/volvo.jpeg" class="gallery-img">
+	</div>
+
+	</div>
+	</div>
+
+	</div>
+
+	<button class="carousel-control-prev"
+	type="button"
+	data-bs-target="#galleryCarouselMobile"
+	data-bs-slide="prev">
+
+	<span class="carousel-control-prev-icon"></span>
+
+	</button>
+
+	<button class="carousel-control-next"
+	type="button"
+	data-bs-target="#galleryCarouselMobile"
+	data-bs-slide="next">
+
+	<span class="carousel-control-next-icon"></span>
+
+	</button>
+
+	</div>
+
+	</div>
 </section>
 
-<!-- ✅ Enquiry Form Script -->
 <script>
+const galleryCarousel = document.querySelector('#galleryCarousel');
+
+new bootstrap.Carousel(galleryCarousel,{
+    interval:3000,
+    ride:'carousel',
+    pause:false,
+    wrap:true
+});
+</script>
+
+	<!-- About Us + Testimonials Section -->
+	<section id="about"
+		style="margin: 60px auto; padding: 40px; background: #fff; border-radius: 12px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); max-width: 1200px;">
+
+<h2 class="vm-main-heading text-center">ABOUT
+					US</h2>
+
+		<!-- Flex Layout -->
+		<div class="about-container">
+
+			<!-- Left: Text -->
+			<div class="about-text">
+				
+				
+				<p>
+					Keeping quality and client satisfaction as our foundation stone,
+					we, <strong>AVT Fastners</strong>, forayed into the business of
+					manufacturing, supplying, and trading a wide range of Fasteners &
+					Stainless Steel Screws. Our products are known all over India for
+					their quality, durability, and high load bearing strength.
+				</p>
+				<p>We would like to introduce ourselves as the best industrial
+					fastener manufacturer in Rohtak as well as the best industrial
+					fastener supplier in Rohtak.</p>
+				<p>We also manufacture hex bolts, socket head cap bolts, collar
+					bolts, studs, counter sunk skew, high tensile bolts, and high
+					tensile fasteners with best quality & support all over in Rohtak.
+					Call us or enquire for all types of industrial fasteners & bolts in
+					Rohtak.</p>
+			</div>
+
+			<!-- Right: Image -->
+			<!-- Right: Image -->
+			<div class="about-img">
+				<img src="/img/avtfast_logo.png" alt="About Us">
+			</div>
+
+
+		</div>
+		</section>
+<!-- <section id="about"
+		style="margin: 60px auto; padding: 40px; background: #fff; border-radius: 12px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); max-width: 1200px;">
+
+<h2 class="vm-main-heading text-center">Our Team</h2>
+
+		✅ Testimonials Section
+		<div class="container">
+    <div class="testimonials-section">
+
+        <h3 class="text-center mb-5" style="color: #444;">WHAT PEOPLE SAY</h3>
+
+        <div class="row text-center">
+
+            Testimonial 1
+            <div class="col-md-6 mb-4">
+                <p class="testimonial-text">
+                    "AVT has been the best supplier I have worked with by far! The quality and price of the product is excellent."
+                </p>
+
+                <img src="/img/sahil.png" class="rounded-circle testimonial-img" alt="sahil">
+
+                <h5 class="mt-3">Sahil Jindal</h5>
+                <small>CEO</small>
+            </div>
+
+            Testimonial 2
+            <div class="col-md-6 mb-4">
+                <p class="testimonial-text">
+                    "AVT is an excellent company, understands customer requirements & provides quality products."
+                </p>
+
+                <img src="/img/shubham.png" class="rounded-circle testimonial-img" alt="shubham">
+
+                <h5 class="mt-3">Shubham Jindal</h5>
+                <small>COO</small>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+	</section>
+ -->
+	<!-- Director Message Section -->
+	<section id="about"
+		style="margin: 60px auto; padding: 40px; background: #fff; border-radius: 12px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); max-width: 1200px;">
+
+<h2 class="vm-main-heading text-center">Director
+					Message</h2>
+
+		<!-- Flex Layout -->
+		<div class="about-container">
+			<!-- Left: Text -->
+			<div class="about-text">
+
+				
+				<p>
+					While a direct, quoted <strong>"Message from the Director"</strong>
+					is not explicitly published on their primary platforms, the
+					company's philosophy—often communicated through leadership—focuses
+					on the following principles:
+				</p>
+				<p>
+					<strong>Core Philosophy: </strong>Quality and client satisfaction
+					are the foundation stones of the company, focusing on supplying
+					high-quality Stainless Steel Fasteners and Screws.
+				</p>
+				<p>
+					<strong>Quality Commitment: </strong>The company adheres to a
+					policy aimed at delivering products that meet international
+					standards through rigorous testing, from raw material procurement
+					to final packing.
+				</p>
+				<p><strong>Operational Focus: </strong>Providing durable, high-load-bearing
+					strength fasteners (such as Hex Bolts, Socket Head Cap Bolts, and
+					U-Bolts) to meet the specific requirements of various industrial
+					sectors.</p>
+				<p><strong>Growth & Vision: </strong>The company aims to lead in manufacturing by using advanced production technology, such as cold forging, to ensure precision.
+					</p>
+			</div>
+
+			<!-- Right: Image -->
+			<!-- Right: Image -->
+			<div class="about-img">
+				<img src="/img/directorMessage.png" alt="About Us">
+			</div>
+
+
+		</div>
+	</section>
+
+	<!-- Vision & Mission Section -->
+<section id="vision-mission"
+    style="margin: 60px auto; padding: 40px; background: #fff; border-radius: 12px; 
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); max-width: 1200px;">
+
+<h2 class="vm-main-heading text-center">Vision and Mission</h2>
+
+    <div class="about-container">
+
+        <!-- LEFT TEXT -->
+        <div class="about-text">
+
+            <!-- VISION -->
+            <h2 class="vm-title">Vision</h2>
+            <hr class="vm-divider">
+
+            <ul class="vm-list">
+                <li><strong>Market Leadership:</strong> To be recognized as the premier industrial fastener manufacturer known for unmatched quality and durability.</li>
+                <li><strong>Global Presence:</strong> To expand from a domestic leader into a reliable international exporter of high-strength fasteners and screws.</li>
+                <li><strong>Innovation & Excellence:</strong> To continuously update manufacturing capabilities and, through research, provide innovative solutions for industries such as automotive, telecom, and manufacturing.</li>
+            </ul>
+
+            <!-- MISSION -->
+            <h2 class="vm-title" style="margin-top: 30px;">Mission</h2>
+            <hr class="vm-divider">
+
+            <ul class="vm-list">
+                <li><strong>Quality Assurance:</strong> To prioritize strict quality control from raw material procurement to final product, ensuring high tensile strength, load-bearing capacity, and reliability.</li>
+                <li><strong>Customer Delight:</strong>To exceed customer expectations by providing tailored fastener solutions, on-time delivery, and personalized customer service.</li>
+                <li><strong>Ethical Operations:</strong> To operate with absolute integrity, transparency, and high ethical standards.</li>
+                <li><strong>Sustainability:</strong> To adopt environmentally responsible manufacturing processes and materials. </li>
+            </ul>
+
+        </div>
+
+        <!-- RIGHT IMAGE -->
+        <div class="about-img">
+            <img src="/img/vision and mission banner.jpg" alt="Vision and Mission">
+        </div>
+
+    </div>
+
+</section>
+	
+
+	<!-- Contact -->
+	<!-- ✅ Contact Section -->
+	<div id="contact"
+		style="max-width: 1200px; margin: 60px auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);">
+		<h2
+			style="text-align: center; color: #004080; margin-bottom: 20px; padding-bottom: 10px;">Contact
+			Us</h2>
+		<p style="text-align: center; margin-bottom: 30px; color: #444;">
+			If you have any questions or need assistance, please contact us using
+			the details below.</p>
+
+		<!-- Parallel Layout: Contact Details (Left) + Map (Right) -->
+		<div
+			style="display: flex; gap: 40px; align-items: flex-start; margin-top: 20px; flex-wrap: wrap;">
+
+			<!-- Left Column: Contact Details -->
+			<div
+				style="flex: 1; min-width: 300px; padding: 20px; background: #f9f9f9; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);">
+				<h3 style="color: #004080; margin-bottom: 15px; font-size: 1.3rem;">AVT
+					Fastners Pvt. Ltd.</h3>
+				<p style="margin-bottom: 15px; line-height: 1.6;">
+					<strong>Address:</strong><br /> Plot No. 16, IDC Industrial Area,
+					Hisar Road, Rohtak-124001, India
+				</p>
+				<p style="margin-bottom: 15px; line-height: 1.6;">
+					<strong>Phone:</strong><br /> +91 9253098504
+				</p>
+				<p style="margin-bottom: 15px; line-height: 1.6;">
+					<strong>Email:</strong><br /> <a
+						href="mailto:info@avtfastners.com"
+						style="color: #004080; text-decoration: none; font-weight: 600;">info@avtfastners.com</a>
+				</p>
+				<p style="margin-bottom: 0; line-height: 1.6;">
+					<strong>Working Hours:</strong><br /> Monday - Friday: 9:00 AM to
+					6:00 PM<br /> Saturday: 9:00 AM to 1:00 PM<br /> Sunday: Closed
+				</p>
+			</div>
+
+			<div
+				style="flex: 1; width: 100%; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);">
+
+				<!--<iframe
+					src="https://maps.app.goo.gl/MBLPeiKFMAn5X6ig6"
+					width="100%" height="380" style="border: 0;" loading="lazy">
+				</iframe>-->
+				
+				<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11749.1916564952!2d76.54476995896302!3d28.896696473810156!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39126c792dc34425%3A0xe113c58145d84b96!2sAVT%20Fastners%20%7C%20Fastener%20Manufacturer%20in%20Rohtak!5e0!3m2!1sen!2sin!4v1782810037128!5m2!1sen!2sin" width="600" height="380" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+
+			</div>
+
+
+		</div>
+	</div>
+
+	<!-- ✅ Enquiry Section -->
+	<section id="enquiry" class="container my-5">
+		<div class="card shadow-lg border-0 mx-auto"
+			style="max-width: 800px; border-radius: 15px;">
+			<div class="card-body p-5">
+				<h2 class="text-center mb-4 fw-bold" style="color: #004080;">Send
+					Us an Enquiry</h2>
+
+				<p class="text-center mb-5 text-muted">We’d love to hear from
+					you! Please fill out the form below and our team will get back to
+					you shortly.</p>
+
+				<form id="enquiryForm">
+					<div class="mb-3">
+						<label for="name" class="form-label fw-semibold">Your Name</label>
+						<input type="text" id="name" name="name"
+							class="form-control form-control-lg"
+							placeholder="Enter your full name" required>
+					</div>
+
+					<div class="mb-3">
+						<label for="email" class="form-label fw-semibold">Your
+							Email</label> <input type="email" id="email" name="email"
+							class="form-control form-control-lg"
+							placeholder="Enter your email address" required>
+					</div>
+
+					<div class="mb-4">
+						<label for="message" class="form-label fw-semibold">Message</label>
+						<textarea id="message" name="message" rows="5"
+							class="form-control form-control-lg"
+							placeholder="Write your enquiry here..." required></textarea>
+					</div>
+
+					<div class="text-center">
+						<button type="submit" class="btn-inline-hover">Send
+							Enquiry</button>
+					</div>
+
+				</form>
+
+				<p id="responseMsg" class="text-center mt-4 fw-bold"></p>
+			</div>
+		</div>
+	</section>
+
+	<!-- ✅ Enquiry Form Script -->
+	<script>
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("enquiryForm");
   const responseMsg = document.getElementById("responseMsg");
@@ -437,31 +885,31 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-<div id="social-connect">
-  <h2>Join Our Community</h2>
+	<div id="social-connect">
+		<h2>Join Our Community</h2>
 
-  <div class="social-icons">
-    <a href="https://www.facebook.com/p/AVT-Fastners-61559642626581/" target="_blank" class="social-icon facebook">
-      <i class="fab fa-facebook-f"></i>
-    </a>
-    <a href="https://in.linkedin.com/company/avtfastners" target="_blank" class="social-icon linkedin">
-      <i class="fab fa-linkedin-in"></i>
-    </a>
-  </div>
-</div>
-
+		<div class="social-icons">
+			
+			</a> <a href="https://in.linkedin.com/company/avtfastners"
+				target="_blank" class="social-icon linkedin"> <i
+				class="fab fa-linkedin-in"></i>
+			</a>
+		</div>
+	</div>
 
 
 
 
 
-<!-- ✅ Font Awesome (needed for icons) -->
-<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+	<!-- ✅ Font Awesome (needed for icons) -->
+	<script src="https://kit.fontawesome.com/a076d05399.js"
+		crossorigin="anonymous"></script>
 
 
- <div th:replace="fragments/footer :: footer"></div>
- 
- <script>
+	<div th:replace="fragments/footer :: footer"></div>
+
+	<script>
 
 document.addEventListener("DOMContentLoaded", function(){
 
@@ -471,6 +919,11 @@ document.addEventListener("DOMContentLoaded", function(){
   if(menuBtn){
     menuBtn.addEventListener("click", function(){
       navList.classList.toggle("active");
+      if(navList.classList.contains("active")){
+    document.body.style.overflow = "hidden";   // 🔥 lock scroll
+  } else {
+    document.body.style.overflow = "auto";     // 🔥 unlock scroll
+  }
     });
   }
 
@@ -500,31 +953,56 @@ document.addEventListener("DOMContentLoaded", function(){
 
 </script>
 
- 
- 
-<script>
-  let currentSlideIndex = 0;
-  const slides = document.querySelectorAll('.carousel-slide');
-  const dots = document.querySelectorAll('.dot');
-  const totalSlides = slides.length;
 
-  function showSlide(index) {
-    slides.forEach(s => s.classList.remove('active'));
-    dots.forEach(d => d.classList.remove('active'));
-    currentSlideIndex = index;
-    if (currentSlideIndex >= totalSlides) currentSlideIndex = 0;
-    if (currentSlideIndex < 0) currentSlideIndex = totalSlides - 1;
-    slides[currentSlideIndex].classList.add('active');
-    dots[currentSlideIndex].classList.add('active');
+
+	<script>
+  let currentSlideIndex = 0;
+
+  function initCarousel() {
+    const slides = document.querySelectorAll('.carousel-slide');
+    const dots = document.querySelectorAll('.dot');
+    const totalSlides = slides.length;
+
+    function showSlide(index) {
+      slides.forEach(s => s.classList.remove('active'));
+      dots.forEach(d => d.classList.remove('active'));
+
+      currentSlideIndex = index;
+
+      if (currentSlideIndex >= totalSlides) currentSlideIndex = 0;
+      if (currentSlideIndex < 0) currentSlideIndex = totalSlides - 1;
+
+      slides[currentSlideIndex].classList.add('active');
+      dots[currentSlideIndex].classList.add('active');
+    }
+
+    function nextSlide() {
+      showSlide(currentSlideIndex + 1);
+    }
+
+    function prevSlide() {
+      showSlide(currentSlideIndex - 1);
+    }
+
+    function currentSlide(n) {
+      showSlide(n);
+    }
+
+    // expose to global (for onclick)
+    window.nextSlide = nextSlide;
+    window.prevSlide = prevSlide;
+    window.currentSlide = currentSlide;
+
+    setInterval(nextSlide, 4000);
   }
 
-  function nextSlide() { showSlide(currentSlideIndex + 1); }
-  setInterval(nextSlide, 4000);
-  function currentSlide(n) { showSlide(n); }
+  // ✅ IMPORTANT: run after DOM loads
+  document.addEventListener("DOMContentLoaded", initCarousel);
 </script>
 
-<!-- Bootstrap Bundle with Popper (needed for carousel controls) -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+	<!-- Bootstrap Bundle with Popper (needed for carousel controls) -->
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
 
 </body>

@@ -31,3 +31,18 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# Environment & secrets
+.env
+db_password.txt
+
+# Database dumps
+*.dump
+*.sql
+
+# Runtime uploads
+uploads/
+
+# Logs
+*.log
+logs/

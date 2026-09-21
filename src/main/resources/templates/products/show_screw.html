@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<!-- ✅ IMPORTANT -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Screw</title>
+
+<!-- Bootstrap -->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+
+<!-- CSS -->
+<link rel="stylesheet" href="/css/product.css">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+
+	<div th:replace="fragments/header :: siteHeader"></div>
+
+	<!-- HEADER -->
+	<div class="fastener-header">
+		<h5>Manufacturer & Supplier</h5>
+		<h1>SCREWS</h1>
+	</div>
+
+
+
+	<!-- MAIN CONTENT -->
+	<div class="container mt-4 mb-4">
+		
+
+		<!-- CARD SECTION -->
+		<div class="container-box mb-3"
+			style="box-shadow: black 2px solid; border: black 2px solid">
+
+
+			<!-- TABS -->
+			<div class="tabs">
+				<button class="tab-btn active" onclick="loadMain('self', event)">Self
+					Tapping Screw</button>
+				<button class="tab-btn" onclick="loadMain('sem', event)">SEM
+					Screw</button>
+				<button class="tab-btn" onclick="loadMain('machine', event)">Machine
+					Screw</button>
+			</div>
+			</div>
+			<div class="container-box mb-3"
+			style="box-shadow: black 2px solid; border: black 2px solid">
+
+			<!-- SUB TABS -->
+			<div id="subTabs" class="tabs mt-3"></div>
+
+			<!-- CONTENT -->
+			<div class="row content-section align-items-center mt-3">
+
+				<div class="col-md-6 col-12">
+					<h5 id="subTitle"></h5>
+					<p id="description"></p>
+				</div>
+
+				<div class="col-md-6 col-12 text-center">
+					<img id="productImage" class="img-fluid product-img" />
+				</div>
+
+			</div>
+
+			<!-- SPEC SECTION -->
+			<div class="mt-5">
+				<h4>SIZE & SPECIFICATIONS</h4>
+
+				<div class="row mt-3 align-items-center">
+					<div class="col-md-6 text-center">
+						<img id="specImage" class="img-fluid spec-img" />
+					</div>
+
+					<div class="col-md-6">
+						<table class="table table-bordered">
+							<tbody id="specTableBody"></tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+
+		</div>
+</div>
+		<div th:replace="fragments/footer :: footer"></div>
+		<!-- SCRIPT -->
+		<script th:inline="none">
+
+const data = {
+
+    self: [
+        {
+            title: "Pan Head",
+            desc: `
+<p>
+AVT Fastners is the name listed among the top most leading companies manufacturing in Pan Head Self Tapping Screw Fasteners. The latent buyers are also facilitated with the accessibility of our products advertised under the brand name AVT Fastners, and offered in standard as well as modified specifications. The Pan Head Screw are manufactured using best quality raw materials and progressive manufacturing techniques that certify quality and quantity production. The reasonability and well-timed delivery have also played an essential role in the augmentation of the demands of the Pan Head Self Tapping Screws. In addition, we are now well recognised as one of the mounting Pan Head Self Tapping Screw Manufacturers, Suppliers and Exporters from Delhi, India.
+</p>
+
+<p>
+We provide a wide variety of Screw Fasteners that are manufactured to offer outstanding performance. A screw is an external threaded fastener that is inserted into holes in assembled parts. It is available in several varieties that help in meeting the demands of several customers. These are used in various mechanical and automobile industries. Featured with utmost perfection, these are widely renowned due to their durability, efficiency, and anti-corrosive qualities.
+</p>
+`,
+            img:  "/img/product/pan_head.jpg",
+            specImg: "/img/product/pan head drawing.jpg",
+            specs: [
+                ["Material", " SS304 & MS"],
+            ["Diameter", " M2~M8"],
+            ["Length"," Upto 50mm"],
+            ["Coating in MS", " Natural, Zinc Yellow/white, Nickel-plating, Chrome- plating, Black"],
+            ["Coating in SS", " Natural, Passivation"],
+            ["Head shapes", "Pan Head"],
+            ["Screw tip"," Self Tapping"],
+            ["Finish","Natural"],
+            ["Package", "Based on customer requirement, usually small box/carton/pallet."],
+            ["Features", "Good anti-corrosion ability"],
+            ["Certification", "ISO 9001:2015, 14001:2015, RoHS"]
+            ]
+        },
+        {
+            title: "CSK Head",
+            desc:`
+<p>
+AVT Fastners is the name listed among the top most leading companies manufacturing in CSK Head Self Tapping Screw Fasteners. The latent buyers are also facilitated with the accessibility of our products advertised under the brand name AVT Fastners, and offered in standard as well as modified specifications. The CSK Head Screw are manufactured using best quality raw materials and progressive manufacturing techniques that certify quality and quantity production. The reasonability and well-timed delivery have also played an essential role in the augmentation of the demands of the CSK Head Self Tapping Screws. In addition, we are now well recognised as one of the mounting CSK Head Self Tapping Screw Manufacturers, Suppliers and Exporters from Delhi, India.</p>
+
+<p>
+We provides wide variety of Screw Fasteners that are manufactured to offer an outstanding functioning. A screw is an external threaded fastener that is inserted into holes in assembled parts. It is available in several varieties that help in meeting the demands of several customers. These are used in various mechanical and automobile industries. Featured with utmost perfection, these are widely renowned due to its durability, efficiency, and anti-corrosive qualities.</p>
+`,
+            img: "/img/product/Self-Tapping-Screw07_05_2016_05_04_08.jpg",
+            specImg: "/img/product/CSK head drawing.jpg",
+            specs: [
+               ["Material", " SS304 & MS"],
+            ["Diameter", " M2~M8"],
+            ["Length"," Upto 50mm"],
+            ["Coating in MS", " Natural, Zinc Yellow/white, Nickel-plating, Chrome- plating, Black"],
+            ["Coating in SS", " Natural, Passivation"],
+            ["Head shapes", "CSK Head"],
+            ["Screw tip"," Self Tapping"],
+            ["Finish","Natural"],
+            ["Package", "Based on customer requirement, usually small box/carton/pallet."],
+            ["Features", "Good anti-corrosion ability"],
+            ["Certification", "ISO 9001:2015, 14001:2015, RoHS"]
+            ]
+        },
+        {
+            title: "Truss Head",
+            desc: `
+<p>
+AVT Fastners is the name listed among the top most leading companies manufacturing in Truss Head Self Tapping Screw Fasteners. The latent buyers are also facilitated with the accessibility of our products advertised under the brand name AVT Fastners, and offered in standard as well as modified specifications. The Truss Head Screw are manufactured using best quality raw materials and progressive manufacturing techniques that certify quality and quantity production. The reasonability and well-timed delivery have also played an essential role in the augmentation of the demands of the Truss Head Self Tapping Screws. In addition, we are now well recognised as one of the mounting Truss Head Self Tapping Screw Manufacturers, Suppliers and Exporters from Delhi, India.</p>
+
+<p>
+We provides wide variety of Screw Fasteners that are manufactured to offer an outstanding functioning. A screw is an external threaded fastener that is inserted into holes in assembled parts. It is available in several varieties that help in meeting the demands of several customers. These are used in various mechanical and automobile industries. Featured with utmost perfection, these are widely renowned due to its durability, efficiency, and anti-corrosive qualities.</p>
+`,
+            img: "/img/product/truss head.jpg",
+            specImg: "/img/product/truss head drawing.jpg",
+            specs: [
+            ["Material", " SS304 & MS"],
+            ["Diameter", " M2~M8"],
+            ["Length"," Upto 50mm"],
+            ["Coating in MS", " Natural, Zinc Yellow/white, Nickel-plating, Chrome- plating, Black"],
+            ["Coating in SS", " Natural, Passivation"],
+            ["Head shapes", " Truss Head"],
+            ["Screw tip"," Self Tapping"],
+            ["Finish","Natural"],
+            ["Package", "Based on customer requirement, usually small box/carton/pallet."],
+            ["Features", "Good anti-corrosion ability"],
+            ["Certification", "ISO 9001:2015, 14001:2015, RoHS"]
+            ]
+        },
+     {
+            title: "HEX Head",
+            desc: `
+<p>
+AVT Fastners is the name listed among the top most leading companies manufacturing in Truss Head Self Tapping Screw Fasteners. The latent buyers are also facilitated with the accessibility of our products advertised under the brand name AVT Fastners, and offered in standard as well as modified specifications. The Truss Head Screw are manufactured using best quality raw materials and progressive manufacturing techniques that certify quality and quantity production. The reasonability and well-timed delivery have also played an essential role in the augmentation of the demands of the Truss Head Self Tapping Screws. In addition, we are now well recognised as one of the mounting Truss Head Self Tapping Screw Manufacturers, Suppliers and Exporters from Delhi, India.</p>
+
+<p>
+We provides wide variety of Screw Fasteners that are manufactured to offer an outstanding functioning. A screw is an external threaded fastener that is inserted into holes in assembled parts. It is available in several varieties that help in meeting the demands of several customers. These are used in various mechanical and automobile industries. Featured with utmost perfection, these are widely renowned due to its durability, efficiency, and anti-corrosive qualities.</p>
+`,
+            img: "/img/product/Hex Head Self Tapping.jfif",
+            specImg: "/img/product/hex head drawing.jpg",
+            specs: [
+            ["Material", " SS304 & MS"],
+            ["Diameter", " M2~M8"],
+            ["Length"," Upto 50mm"],
+            ["Coating in MS", " Natural, Zinc Yellow/white, Nickel-plating, Chrome- plating, Black"],
+            ["Coating in SS", " Natural, Passivation"],
+            ["Head shapes", "Hex Head"],
+            ["Screw tip"," Self Tapping"],
+            ["Finish","Natural"],
+            ["Package", "Based on customer requirement, usually small box/carton/pallet."],
+            ["Features", "Good anti-corrosion ability"],
+            ["Certification", "ISO 9001:2015, 14001:2015, RoHS"]
+            ]
+        }
+    ],
+
+    sem: [
+        {
+            title: "Pan Head",
+            desc: "AVT Fastener is one of the trustworthy names for the accessibility of SEMS Screw Fastener. The unparalleled quality and outstanding performance has also made the Metric SEMS Screws an ultimate for various unfavorable conditions. The SEMS Machine Screws, provided by us, is manufactured using best quality raw materials and advanced technology. These Screws are also very stable and has a resistance to rust as top quality raw material is used. These are accessible in standard as well as personalized specifications and is marketed under the brand name AVT Fastners. The latent buyers from all across the world are also satisfied with the ease of use of the SEMS Machine Screw at market price and within the predetermined timeframe. Besides to this, we are re-known as one of the faithful SEMS Screw Manufacturers, Supplies and Exporters from Delhi, India.",
+            img: "/img/product/SEMS-Screw07_05_2016_05_39_05.jpg",
+            specImg: "/img/product/pan head sem drawing.jpg",
+            specs: [
+            ["Material", " SS304 & MS"],
+            ["Diameter", " M2~M8"],
+            ["Length"," Upto 50mm"],
+            ["Coating in MS", " Natural, Zinc Yellow/white, Nickel-plating, Chrome- plating, Black"],
+            ["Coating in SS", " Natural, Passivation"],
+            ["Head shapes", "Pan Head"],
+            ["Screw tip"," Machine Screw"],
+            ["Finish","Natural"],
+            ["Complete with","Washer"],
+            ["Package", "Based on customer requirement, usually small box/carton/pallet."],
+            ["Features", "Good anti-corrosion ability"],
+            ["Certification", "ISO 9001:2015, 14001:2015, RoHS"]
+            ]
+        },
+        {
+            title: "HEX Head",
+            desc: "AVT Fastener is one of the trustworthy names for the accessibility of HEX_Head_SEM_Screw Fastener. The unparalleled quality and outstanding performance has also made the Metric SEMS Screws an ultimate for various unfavorable conditions. The SEMS Machine Screws, provided by us, is manufactured using best quality raw materials and advanced technology. These Screws are also very stable and has a resistance to rust as top quality raw material is used. These are accessible in standard as well as personalized specifications and is marketed under the brand name AVT Fastners. The latent buyers from all across the world are also satisfied with the ease of use of the Hex Head Sem Machine Screw at market price and within the predetermined timeframe. Besides to this, we are re-known as one of the faithful SEMS Screw Manufacturers, Supplies and Exporters from Delhi, India.",
+            img: "/img/product/HEX_Head_SEM_Screw.jpeg",
+            specImg: "/img/product/hex head drawing sem.jpg",
+            specs: [
+	        ["Material", " SS304 & MS"],
+            ["Diameter", " M2~M8"],
+            ["Length"," Upto 50mm"],
+            ["Coating in MS", " Natural, Zinc Yellow/white, Nickel-plating, Chrome- plating, Black"],
+            ["Coating in SS", " Natural, Passivation"],
+            ["Head shapes", "Hex Head"],
+            ["Screw tip"," Machine Screw"],
+            ["Finish","Natural"],
+            ["Complete with","Washer"],
+            ["Package", "Based on customer requirement, usually small box/carton/pallet."],
+            ["Features", "Good anti-corrosion ability"],
+            ["Certification", "ISO 9001:2015, 14001:2015, RoHS"]
+]
+        }
+    ],
+
+    machine: [
+        {
+            title: "Pan Head",
+            desc: "AVT Fastners is much-admired in the market for offering a vast collection of apn Head Machine Screw Fasteners. The reasonability of price and well-time delivery has also played an imperative role in the improvement of the demands by the buyers. Potential buyers from every corner and nook of the world are placing large orders as there is no substitute accessible in terms of quality and performance. The use of elevated grade raw materials in the manufacturing of the Pan Head Machine Screws certify distinguished features like life-long stability and resistivity to unfavourable conditions. In addition to this, we are praised as one of the prominent Machine Screw Manufacturers, Suppliers and Exporters from Delhi, India. The buyers are also pleased with the ease of use of the Metric Machine Screw in standard as well personalized specifications, advertised under the brand name AVT Fastners.",
+            img: "/img/product/pan head machine screw.jpg",
+            specImg: "/img/product/pan head machine screw drawing.jpg",
+            specs: [
+			["Material", " SS304 & MS"],
+            ["Diameter", " M2~M8"],
+            ["Length"," Upto 50mm"],
+            ["Coating in MS", " Natural, Zinc Yellow/white, Nickel-plating, Chrome- plating, Black"],
+            ["Coating in SS", " Natural, Passivation"],
+            ["Head shapes", "Pan Head"],
+            ["Screw tip"," Machine Screw"],
+            ["Finish","Natural"],
+            ["Package", "Based on customer requirement, usually small box/carton/pallet."],
+            ["Features", "Good anti-corrosion ability"],
+            ["Certification", "ISO 9001:2015, 14001:2015, RoHS"]
+]
+        },
+        {
+            title: "CSK Head",
+            desc: "AVT Fastners is much-admired in the market for offering a vast collection of CSK_head_machine_screw Fasteners. The reasonability of price and well-time delivery has also played an imperative role in the improvement of the demands by the buyers. Potential buyers from every corner and nook of the world are placing large orders as there is no substitute accessible in terms of quality and performance. The use of elevated grade raw materials in the manufacturing of the CSK_head_machine_screws certify distinguished features like life-long stability and resistivity to unfavourable conditions. In addition to this, we are praised as one of the prominent Machine Screw Manufacturers, Suppliers and Exporters from Delhi, India. The buyers are also pleased with the ease of use of the Metric Machine Screw in standard as well personalized specifications, advertised under the brand name AVT Fastners.",
+            img: "/img/product/csk head machine screw.jpg",
+            specImg: "/img/product/CSK head drawing machine.jpg",
+            specs: [
+			["Material", " SS304 & MS"],
+            ["Diameter", " M2~M8"],
+            ["Length"," Upto 50mm"],
+            ["Coating in MS", " Natural, Zinc Yellow/white, Nickel-plating, Chrome- plating, Black"],
+            ["Coating in SS", " Natural, Passivation"],
+            ["Head shapes", "CSK Head"],
+            ["Screw tip"," Machine Screw"],
+            ["Finish","Natural"],
+            ["Package", "Based on customer requirement, usually small box/carton/pallet."],
+            ["Features", "Good anti-corrosion ability"],
+            ["Certification", "ISO 9001:2015, 14001:2015, RoHS"]
+]
+        },
+        {
+            title: "Button Head",
+            desc: "AVT Fastners is much-admired in the market for offering a vast collection of Button_head_machine_screw Fasteners. The reasonability of price and well-time delivery has also played an imperative role in the improvement of the demands by the buyers. Potential buyers from every corner and nook of the world are placing large orders as there is no substitute accessible in terms of quality and performance. The use of elevated grade raw materials in the manufacturing of the Button_head_machine_screws certify distinguished features like life-long stability and resistivity to unfavourable conditions. In addition to this, we are praised as one of the prominent Button_head_machine_screw Manufacturers, Suppliers and Exporters from Delhi, India. The buyers are also pleased with the ease of use of the Metric Machine Screw in standard as well personalized specifications, advertised under the brand name AVT Fastners.",
+            img: "/img/product/button head machine screw.jpg",
+            specImg: "/img/product/HEAD DESIGN.jfif",
+            specs: [
+			["Material", " SS304 & MS"],
+            ["Diameter", " M2~M8"],
+            ["Length"," Upto 50mm"],
+            ["Coating in MS", " Natural, Zinc Yellow/white, Nickel-plating, Chrome- plating, Black"],
+            ["Coating in SS", " Natural, Passivation"],
+            ["Head shapes", "Button Head"],
+            ["Screw tip"," Machine Screw"],
+            ["Finish","Natural"],
+            ["Package", "Based on customer requirement, usually small box/carton/pallet."],
+            ["Features", "Good anti-corrosion ability"],
+            ["Certification", "ISO 9001:2015, 14001:2015, RoHS"]
+]
+        },
+        {
+            title: "TRUSS Head",
+            desc: "AVT Fastners is much-admired in the market for offering a vast collection of TRUSS_head_machine_screw Fasteners. The reasonability of price and well-time delivery has also played an imperative role in the improvement of the demands by the buyers. Potential buyers from every corner and nook of the world are placing large orders as there is no substitute accessible in terms of quality and performance. The use of elevated grade raw materials in the manufacturing of the TRUSS_head_machine_screws certify distinguished features like life-long stability and resistivity to unfavourable conditions. In addition to this, we are praised as one of the prominent TRUSS_head_machine_screw Manufacturers, Suppliers and Exporters from Delhi, India. The buyers are also pleased with the ease of use of the Metric Machine Screw in standard as well personalized specifications, advertised under the brand name AVT Fastners.",
+            img: "/img/product/TRUSS_head_machine_screw.jfif",
+            specImg: "/img/product/truss head drawing abc.jpg",
+            specs: [
+			["Material", " SS304 & MS"],
+            ["Diameter", " M2~M8"],
+            ["Length"," Upto 50mm"],
+            ["Coating in MS", " Natural, Zinc Yellow/white, Nickel-plating, Chrome- plating, Black"],
+            ["Coating in SS", " Natural, Passivation"],
+            ["Head shapes", "Truss Head"],
+            ["Screw tip"," Machine Screw"],
+            ["Finish","Natural"],
+            ["Package", "Based on customer requirement, usually small box/carton/pallet."],
+            ["Features", "Good anti-corrosion ability"],
+            ["Certification", "ISO 9001:2015, 14001:2015, RoHS"]
+]
+        },
+        {
+            title: "Cheese Head",
+            desc: "AVT Fastners is much-admired in the market for offering a vast collection of Cheese Head Machine Screw Fasteners. The reasonability of price and well-time delivery has also played an imperative role in the improvement of the demands by the buyers. Potential buyers from every corner and nook of the world are placing large orders as there is no substitute accessible in terms of quality and performance. The use of elevated grade raw materials in the manufacturing of the Cheese Head Machine Screws certify distinguished features like life-long stability and resistivity to unfavourable conditions. In addition to this, we are praised as one of the prominent Cheese Head Machine Screw Manufacturers, Suppliers and Exporters from Delhi, India. The buyers are also pleased with the ease of use of the Metric Machine Screw in standard as well personalized specifications, advertised under the brand name AVT Fastners.",
+            img: "/img/product/cheese head machine screw.jpg",
+            specImg: "/img/product/Cheese head machine screw drawing.jpg",
+            specs: [
+			["Material", " SS304 & MS"],
+            ["Diameter", " M2~M8"],
+            ["Length"," Upto 50mm"],
+            ["Coating in MS", " Natural, Zinc Yellow/white, Nickel-plating, Chrome- plating, Black"],
+            ["Coating in SS", " Natural, Passivation"],
+            ["Head shapes", "Cheese Head"],
+            ["Screw tip"," Machine Screw"],
+            ["Finish","Natural"],
+            ["Package", "Based on customer requirement, usually small box/carton/pallet."],
+            ["Features", "Good anti-corrosion ability"],
+            ["Certification", "ISO 9001:2015, 14001:2015, RoHS"]
+]
+        },
+        {
+            title: "Tamper Proof",
+            desc: "AVT Fastners is much-admired in the market for offering a vast collection of Tamper Proof Head Machine Screw Fasteners. The reasonability of price and well-time delivery has also played an imperative role in the improvement of the demands by the buyers. Potential buyers from every corner and nook of the world are placing large orders as there is no substitute accessible in terms of quality and performance. The use of elevated grade raw materials in the manufacturing of the Tamper Proof Head Machine Screws certify distinguished features like life-long stability and resistivity to unfavourable conditions. In addition to this, we are praised as one of the prominent Tamper Proof Head Machine Screw Manufacturers, Suppliers and Exporters from Delhi, India. The buyers are also pleased with the ease of use of the Metric Machine Screw in standard as well personalized specifications, advertised under the brand name AVT Fastners.",
+            img: "/img/product/tamper proof machine screw.png",
+            specImg: "/img/product/tamper proof drawing.jpg",
+            specs: [
+			["Material", " SS304 & MS"],
+            ["Diameter", " M2~M8"],
+            ["Length"," Upto 50mm"],
+            ["Coating in MS", " Natural, Zinc Yellow/white, Nickel-plating, Chrome- plating, Black"],
+            ["Coating in SS", " Natural, Passivation"],
+            ["Head shapes", "Tamper Proof Head"],
+            ["Screw tip"," Machine Screw"],
+            ["Finish","Natural"],
+            ["Package", "Based on customer requirement, usually small box/carton/pallet."],
+            ["Features", "Good anti-corrosion ability"],
+            ["Certification", "ISO 9001:2015, 14001:2015, RoHS"]
+]
+        }
+    ]
+};
+
+let currentMain = "self";
+
+function loadMain(type, event) {
+
+    currentMain = type;
+
+    // Active main tab
+    document.querySelectorAll(".tab-btn").forEach(btn => btn.classList.remove("active"));
+    event.target.classList.add("active");
+
+    // Create sub tabs
+    let subTabHTML = "";
+    data[type].forEach((item, index) => {
+        subTabHTML += `<button class="tab-btn ${index===0?'active':''}" 
+            onclick="loadSub(${index}, event)">${item.title}</button>`;
+    });
+
+    document.getElementById("subTabs").innerHTML = subTabHTML;
+
+    loadSub(0);
+}
+
+function loadSub(index, event) {
+
+    let d = data[currentMain][index];
+
+    document.getElementById("subTitle").innerText = d.title;
+    document.getElementById("description").innerHTML = d.desc;
+    document.getElementById("productImage").src = d.img;
+    document.getElementById("specImage").src = d.specImg;
+
+    let table = "";
+    d.specs.forEach(row => {
+        table += `<tr><td>${row[0]}</td><td>${row[1]}</td></tr>`;
+    });
+
+    document.getElementById("specTableBody").innerHTML = table;
+
+    // active sub tab
+    if(event){
+        document.querySelectorAll("#subTabs .tab-btn").forEach(btn => btn.classList.remove("active"));
+        event.target.classList.add("active");
+    }
+}
+
+window.onload = function () {
+    loadMain('self', {target: document.querySelector('.tab-btn')});
+};
+
+</script>
+
+
+
+
+		<script>
+
+document.addEventListener("DOMContentLoaded", function(){
+
+  const menuBtn = document.getElementById("mobile-menu");
+  const navList = document.getElementById("nav-list");
+
+  if(menuBtn){
+    menuBtn.addEventListener("click", function(){
+      navList.classList.toggle("active");
+      if(navList.classList.contains("active")){
+    document.body.style.overflow = "hidden";   // 🔥 lock scroll
+  } else {
+    document.body.style.overflow = "auto";     // 🔥 unlock scroll
+  }
+    });
+  }
+
+  /* MOBILE DROPDOWN FIX */
+
+  const dropdownLinks = document.querySelectorAll(".dropdown > a");
+
+  dropdownLinks.forEach(link => {
+    link.addEventListener("click", function(e){
+
+      if(window.innerWidth <= 768){
+
+        e.preventDefault();
+
+        const submenu = this.nextElementSibling;
+
+        if(submenu){
+          submenu.classList.toggle("show");
+        }
+
+      }
+
+    });
+  });
+
+});
+
+</script>
+
+
+
+
+
+		<!-- Bootstrap Bundle with Popper (needed for carousel controls) -->
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

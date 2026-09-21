@@ -101,5 +101,44 @@ public class PageController {
 	        }
 	    }
 	 
+	 @GetMapping("/our-team")
+	    public String ourTeamPage() {
+	        return "fragments/OurTeam"; // Thymeleaf template
+	    }
+	 
+	 @GetMapping("/media-page")
+	    public String ourNewsandMedia() {
+	        return "fragments/NewsAndMedia"; // Thymeleaf template
+	    }
+	 
+	 @GetMapping("/contact-us")
+	    public String contactUs() {
+	        return "fragments/ContactUs"; // Thymeleaf template
+	    }
+	 
+	 @GetMapping("/company-profile")
+	    public String companyProfile() {
+	        return "fragments/CompanyProfile"; // Thymeleaf template
+	    }
+	 
+	 @GetMapping("/vision-mission")
+	    public String visionMission() {
+	        return "fragments/VisionAndMission"; // Thymeleaf template
+	    }
+	 
+	 @GetMapping("/director")
+	    public String directorMsg() {
+	        return "fragments/Director"; // Thymeleaf template
+	    }
+	 
+	 @GetMapping("/exhibition")
+	    public String Exhibition() {
+	        return "fragments/Exhibition"; // Thymeleaf template
+	    }
+	 
+	 @GetMapping("/growth")
+	 public String growthPage() {
+		 return "fragments/growth";
+	 }
 	 
 }

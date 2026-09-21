@@ -284,6 +284,11 @@ const navList = document.getElementById("nav-list");
 if(menuBtn){
 menuBtn.addEventListener("click", function(){
 navList.classList.toggle("active");
+if(navList.classList.contains("active")){
+    document.body.style.overflow = "hidden";   // 🔥 lock scroll
+  } else {
+    document.body.style.overflow = "auto";     // 🔥 unlock scroll
+  }
 });
 }
 

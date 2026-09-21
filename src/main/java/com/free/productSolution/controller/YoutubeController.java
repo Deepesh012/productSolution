@@ -68,4 +68,24 @@ public class YoutubeController {
             model.addAttribute("user", user);
         }
     }
+    @GetMapping("/media/upload")
+    public String mediaPage(Model model) {
+
+        YoutubeVideo video = service.getVideoByType("main"); // or your type
+
+        model.addAttribute("video", video); // ✅ THIS FIXES YOUR ISSUE
+
+        return "fragments/NewsAndMedia"; // your HTML file name (media.html)
+    }
+
+    @GetMapping("/media-view")
+    public String showMediaPage(Model model) {
+
+        YoutubeVideo video = service.getVideoByType("main");
+        model.addAttribute("video", video);   // ✅ REQUIRED
+
+        return "fragments/NewsAndMedia"; // your HTML
+    }
+
+    
 }

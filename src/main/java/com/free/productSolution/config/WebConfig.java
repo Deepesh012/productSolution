@@ -15,14 +15,27 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        String absolutePath = Paths.get(uploadDir).toAbsolutePath().normalize().toString();
 
-        String uploadPath = Paths.get("uploads").toAbsolutePath().toUri().toString();
+        registry.addResourceHandler("/images/**")
+                .addResourceLocations("file:" + absolutePath + "/images/");
 
-        registry.addResourceHandler("/uploads/**")
-                .addResourceLocations(uploadPath);
+        registry.addResourceHandler("/videos/**")
+                .addResourceLocations("file:" + absolutePath + "/videos/");
+        
+     // Correct carousel path
+        registry.addResourceHandler("/carousel/**")
+                .addResourceLocations("file:" + absolutePath + "/carousel/");
+        
+        // ✅ Add this line for organization chart
+        registry.addResourceHandler("/organization-chart/**")
+                .addResourceLocations("file:" + absolutePath + "/organization-chart/");
+        
+        // ✅ Add this for fasteners
+        registry.addResourceHandler("/fastners/**")
+                .addResourceLocations("file:" + absolutePath + "/fastners/");
+        
     }
-
-
 
 }
 

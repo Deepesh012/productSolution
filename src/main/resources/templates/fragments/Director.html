@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AVT Fastners Pvt. Ltd.</title>
+<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+<!-- Bootstrap CSS -->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+
+<style>
+.contact-banner {
+    width: 100%;
+    height: 250px;
+    background: url('/img/director.jpg') center/cover no-repeat;
+    position: relative;
+}
+
+.banner-overlay {
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+}
+
+.banner-overlay h1 {
+    font-size: 36px;
+    font-weight: 700;
+}
+
+.banner-overlay p {
+    font-size: 16px;
+}
+
+</style>
+
+</head>
+<body>
+
+
+
+	<div th:replace="fragments/header :: siteHeader"></div>
+	
+	<div class="contact-banner">
+    <div class="banner-overlay">
+       
+    </div>
+</div>
+
+	<!-- Director Message Section -->
+	<section id="about"
+		style="margin: 60px auto; padding: 40px; background: #fff; border-radius: 12px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); max-width: 1200px;">
+
+		<!-- Flex Layout -->
+		<div class="about-container">
+			<!-- Left: Text -->
+			<div class="about-text">
+
+				<h2 style="font-weight: bold; font-size: 2rem; margin-bottom: 10px;">Director
+					Message</h2>
+				<hr style="width: 60px; border: 2px solid #e63946; margin: 15px 0;">
+				<p>
+					While a direct, quoted <strong>"Message from the Director"</strong>
+					is not explicitly published on their primary platforms, the
+					company's philosophy—often communicated through leadership—focuses
+					on the following principles:
+				</p>
+				<p>
+					<strong>Core Philosophy: </strong>Quality and client satisfaction
+					are the foundation stones of the company, focusing on supplying
+					high-quality Stainless Steel Fasteners and Screws.
+				</p>
+				<p>
+					<strong>Quality Commitment: </strong>The company adheres to a
+					policy aimed at delivering products that meet international
+					standards through rigorous testing, from raw material procurement
+					to final packing.
+				</p>
+				<p><strong>Operational Focus: </strong>Providing durable, high-load-bearing
+					strength fasteners (such as Hex Bolts, Socket Head Cap Bolts, and
+					U-Bolts) to meet the specific requirements of various industrial
+					sectors.</p>
+				<p><strong>Growth & Vision: </strong>The company aims to lead in manufacturing by using advanced production technology, such as cold forging, to ensure precision.
+					</p>
+			</div>
+
+			<!-- Right: Image -->
+			<!-- Right: Image -->
+			<div class="about-img">
+				<img src="/img/directorMessage.png" alt="About Us">
+			</div>
+
+
+		</div>
+	</section>
+
+	<div th:replace="fragments/footer :: footer"></div>
+
+	<script>
+
+document.addEventListener("DOMContentLoaded", function(){
+
+  const menuBtn = document.getElementById("mobile-menu");
+  const navList = document.getElementById("nav-list");
+
+  if(menuBtn){
+    menuBtn.addEventListener("click", function(){
+      navList.classList.toggle("active");
+      if(navList.classList.contains("active")){
+    document.body.style.overflow = "hidden";   // 🔥 lock scroll
+  } else {
+    document.body.style.overflow = "auto";     // 🔥 unlock scroll
+  }
+    });
+  }
+
+  /* MOBILE DROPDOWN FIX */
+
+  const dropdownLinks = document.querySelectorAll(".dropdown > a");
+
+  dropdownLinks.forEach(link => {
+    link.addEventListener("click", function(e){
+
+      if(window.innerWidth <= 768){
+
+        e.preventDefault();
+
+        const submenu = this.nextElementSibling;
+
+        if(submenu){
+          submenu.classList.toggle("show");
+        }
+
+      }
+
+    });
+  });
+
+});
+
+</script>
+
+
+
+	
+
+	<!-- Bootstrap Bundle with Popper (needed for carousel controls) -->
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+
+</body>
+</html>

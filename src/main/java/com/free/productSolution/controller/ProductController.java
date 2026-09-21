@@ -124,7 +124,38 @@ public class ProductController {
 
 	    return "redirect:/product/show_fastners";
 	}
+	
+	
+	@GetMapping("/show_nuts")
+	public String showNuts(Model model) {
+	    model.addAttribute("Nuts");
+	    return "products/show_nuts"; // this should be your Thymeleaf template
+	}
+	
+	@GetMapping("/show_bolts")
+	public String showBolts(Model model) {
+	    model.addAttribute("Bolts");
+	    return "products/show_bolts"; // this should be your Thymeleaf template
+	}
+	
+	@GetMapping("/show_threaded_rod")
+	public String showThreadedRod(Model model) {
+	    model.addAttribute("Threaded Rod");
+	    return "products/show_threaded_rod"; // this should be your Thymeleaf template
+	}
 
+	@GetMapping("/show_hose_clamp")
+	public String showHoseClamp(Model model) {
+	    model.addAttribute("Hose Clamp");
+	    return "products/show_hose_clamp"; // this should be your Thymeleaf template
+	}
+	
+	@GetMapping("/show_screw")
+	public String showSrew(Model model) {
+	    model.addAttribute("Screw");
+	    return "products/show_screw"; // this should be your Thymeleaf template
+	}
 	
 	
+	 
 }
