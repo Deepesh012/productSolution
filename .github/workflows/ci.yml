@@ -12,6 +12,21 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_DB: productsolution
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres -d productsolution"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -23,5 +38,9 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
-      - name: Build application
-        run: mvn clean package -DskipTests
+      - name: Run tests and build application
+        env:
+          TEST_DB_URL: jdbc:postgresql://localhost:5432/productsolution
+          TEST_DB_USERNAME: postgres
+          TEST_DB_PASSWORD: postgres
+        run: mvn clean package
