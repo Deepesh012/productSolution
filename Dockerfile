@@ -15,6 +15,7 @@ WORKDIR /app
 
 COPY --from=build /app/target/productSolution-0.0.1-SNAPSHOT.jar app.jar
 
-EXPOSE 8080
+EXPOSE 8200
 
 CMD ["java","-jar","app.jar"]
+
