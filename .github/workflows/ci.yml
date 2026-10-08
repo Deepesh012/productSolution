@@ -62,13 +62,38 @@ jobs:
       - name: Push Docker image to GHCR
         run: docker push ghcr.io/deepesh012/productsolution:latest
 
-      - name: Test EC2 SSH connection
+      - name: Deploy to EC2
         uses: appleboy/ssh-action@v1.2.0
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            echo "Connected to EC2"
-            hostname
-            docker --version
+            set -e
+
+            echo "Pulling latest Docker image..."
+            docker pull ghcr.io/deepesh012/productsolution:latest
+
+            echo "Stopping old application..."
+            docker stop productsolution-app || true
+
+            echo "Removing old application..."
+            docker rm productsolution-app || true
+
+            echo "Starting new application..."
+            docker run -d \
+              --name productsolution-app \
+              --network productsolution-network \
+              -p 8200:8200 \
+              ghcr.io/deepesh012/productsolution:latest
+
+            echo "Waiting for application..."
+            sleep 20
+
+            echo "Checking container..."
+            docker ps --filter "name=productsolution-app"
+
+            echo "Checking application health..."
+            curl -f http://localhost:8200/actuator/health
+
+            echo "Deployment completed successfully!"
