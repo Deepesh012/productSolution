@@ -61,3 +61,14 @@ jobs:
 
       - name: Push Docker image to GHCR
         run: docker push ghcr.io/deepesh012/productsolution:latest
+
+      - name: Test EC2 SSH connection
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            echo "Connected to EC2"
+            hostname
+            docker --version
