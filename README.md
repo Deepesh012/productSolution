@@ -285,6 +285,12 @@ Replace the placeholders with your own key path and current EC2 address. Never u
 ![Email alert](docs/screenshots/06-email-alert.png)
 ```
 
+## System Architecture
+
+The following diagram illustrates the application deployment, database connectivity, and monitoring architecture.
+
+![ProductSolution Architecture](docs/screenshots/07-productsolution-architecture.png)
+
 ## Author
 
 **Deepesh Kumar**
