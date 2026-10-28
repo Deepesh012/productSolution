@@ -19,6 +19,7 @@ The application is deployed on **AWS EC2 using Docker** and has a monitoring set
 - Prometheus application-metrics scraping
 - Grafana monitoring dashboard and alert rules
 - Verified email notification for an application-down alert
+- Configire CI/CD for automatic Deployment and Integrate using GitHub Actions
 
 ## Technology Stack
 
@@ -253,9 +254,8 @@ Replace the placeholders with your own key path and current EC2 address. Never u
 | Prometheus application metrics | Scraping verified |
 | Grafana monitoring dashboard | Created |
 | Application-down email alert | Delivery verified |
-| High-CPU and high-JVM-memory alerts | Configured; threshold test not verified |
-| GitHub Actions CI/CD | Not implemented yet |
-| Kubernetes | Not implemented yet |
+| High-CPU and high-JVM-memory alerts | Configured |
+| GitHub Actions CI/CD | Completed |
 
 ## Security Notes
 
