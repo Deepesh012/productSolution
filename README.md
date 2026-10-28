@@ -266,18 +266,24 @@ Replace the placeholders with your own key path and current EC2 address. Never u
 
 ## Screenshots
 
-You can add screenshots of the live application and monitoring setup to this repository. Once the images have been uploaded, add links such as:
-
-```markdown
+### 1. ProductSolution Application
 ![ProductSolution application](docs/screenshots/01-live-application.png)
+
+### 2. Docker Containers
 ![Docker containers](docs/screenshots/02-docker-containers.png)
+
+### 3. Prometheus Target
 ![Prometheus target](docs/screenshots/03-prometheus-target.png)
+
+### 4. Grafana Dashboard
 ![Grafana dashboard](docs/screenshots/04-grafana-dashboard.png)
+
+### 5. Grafana Alert Rules
 ![Grafana alert rules](docs/screenshots/05-grafana-alert-rules.png)
+
+### 6. Email Alert
 ![Email alert](docs/screenshots/06-email-alert.png)
 ```
-
-Only keep image links for screenshots that actually exist at those paths in the repository.
 
 ## Author
 
